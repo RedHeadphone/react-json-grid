@@ -1,21 +1,13 @@
-# json-to-html-table
+# react-json-grid
 
-Convert Nested JSON to HTML Table — React, Javascript.
+React Component that converts JSON to grid table
 
-A simple react component to convert any nested JSON object or array into an HTML table.
-
-for more info see
-
-https://medium.com/web-developer/convert-nested-json-to-html-table-react-javascript-be6611fed718
-
-# Use it Online
-
-Online tool https://kevincobain2000.github.io/json-to-html-table/
+A simple react component to convert any nested JSON object or array into an grid table.
 
 ## Install
 
 ```bash
-npm install --save @kevincobain2000/json-to-html-table
+npm install @redheadphone/react-json-grid
 ```
 
 ## Usage
@@ -23,7 +15,7 @@ npm install --save @kevincobain2000/json-to-html-table
 ```jsx
 import React, { Component } from 'react'
 
-import { JSONToHTMLTable } from '@kevincobain2000/json-to-html-table'
+import { JSONGrid } from '@redheadphone/react-json-grid'
 
 class Example extends Component {
   render () {
@@ -54,12 +46,8 @@ class Example extends Component {
         ]
     }
     return (
-      <JSONToHTMLTable data={data} tableClassName="table table-sm"/>
+      <JSONGrid data={data} tableClassName="table table-sm"/>
     )
   }
 }
 ```
-
-## License
-
-MIT

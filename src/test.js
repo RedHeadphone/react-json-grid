@@ -1,7 +1,7 @@
-import JSONToHTMLTable from '.'
+import JSONGrid from '.'
 
-describe('JSONToHTMLTable', () => {
+describe('JSONGrid', () => {
   it('is truthy', () => {
-    expect(JSONToHTMLTable).toBeTruthy()
+    expect(JSONGrid).toBeTruthy()
   })
 })

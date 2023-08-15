@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles.css'
 
-export const JSONToHTMLTable = (props) => {
+export const JSONGrid = (props) => {
   const { data, wrapperClassName, tableClassName } = props
   return (
     <div className={wrapperClassName}>
@@ -15,7 +15,7 @@ export const JSONToHTMLTable = (props) => {
                 if (data[k] && typeof data[k] === 'object') {
                   return (
                     <td>
-                      <JSONToHTMLTable data={data[k]} tableClassName={tableClassName} />
+                      <JSONGrid data={data[k]} tableClassName={tableClassName} />
                     </td>
                   )
                 }
