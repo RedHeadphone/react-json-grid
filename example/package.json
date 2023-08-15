@@ -1,0 +1,24 @@
+{
+  "name": "json-to-html-table-example",
+  "homepage": "/json-to-html-table",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "@kevincobain2000/json-to-html-table": "^1.0.1",
+    "bootstrap": "^4.5.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-codemirror": "^1.0.0",
+    "react-dom": "^16.4.1",
+    "react-scripts": "^1.1.4"
+  },
+  "scripts": {
+    "dev": "react-scripts start",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "rm -rf ../docs/* && mv build/* ../docs/",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
