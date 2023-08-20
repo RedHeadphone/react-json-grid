@@ -10,6 +10,15 @@ function App() {
     "formed": 2016,
     "secretBase": "Super tower",
     "active": true,
+    "won": [2016,2017,2019],
+    "leader": {
+      "isActive": true,
+      "age": 20,
+      "eyeColor": "blue",
+      "name": "Acosta Bird",
+      "gender": "male",
+      "registered": "2019-02-11T09:59:58 +05:00"
+    },
     "members": [
       {
         "index": 0,
