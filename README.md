@@ -51,3 +51,15 @@ class Example extends Component {
   }
 }
 ```
+
+## Important Command
+
+Run JSONGrid package in development mode
+```shell
+npm run dev
+```
+
+Run demo in development mode
+```shell
+cd demo && npm run dev
+```
