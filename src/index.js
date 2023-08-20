@@ -35,8 +35,6 @@ const NestedJSONGrid = (props) => {
     level,
     data,
     dataKey,
-    wrapperClassName,
-    tableClassName,
     highlightedElement,
     setHighlightedElement,
   } = props;
@@ -57,8 +55,7 @@ const NestedJSONGrid = (props) => {
 
   const renderTable = () => {
     return (
-      <div className={wrapperClassName}>
-        <table className={tableClassName}>
+        <table className={styles["json-table"]}>
           <tbody>
             {Object.keys(data).map((k) => (
               <tr key={k}>
@@ -83,7 +80,6 @@ const NestedJSONGrid = (props) => {
                           level={level + 1}
                           dataKey={k}
                           data={data[k]}
-                          tableClassName={tableClassName}
                           highlightedElement={highlightedElement}
                           setHighlightedElement={setHighlightedElement}
                         />
@@ -107,7 +103,6 @@ const NestedJSONGrid = (props) => {
             ))}
           </tbody>
         </table>
-      </div>
     );
   };
 

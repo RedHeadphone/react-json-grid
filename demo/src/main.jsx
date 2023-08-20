@@ -160,7 +160,7 @@ function App() {
 
   return (
     <div className='json-grid-container'>
-      <JSONGrid data={data} tableClassName="table table-sm"/>
+      <JSONGrid data={data}/>
     </div>
   )
 }

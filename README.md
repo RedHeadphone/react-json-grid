@@ -46,7 +46,7 @@ class Example extends Component {
         ]
     }
     return (
-      <JSONGrid data={data} tableClassName="table table-sm"/>
+      <JSONGrid data={data}/>
     )
   }
 }

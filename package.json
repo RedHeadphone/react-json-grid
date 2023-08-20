@@ -1,10 +1,17 @@
 {
   "name": "@redheadphone/react-json-grid",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "React Component that converts JSON to grid table",
   "author": "Huzaifa Khilawala",
   "license": "MIT",
   "repository": "https://github.com/RedHeadphone/react-json-grid",
+  "keywords": [
+    "react",
+    "json",
+    "grid",
+    "json-grid",
+    "react-json-grid"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
