@@ -55,7 +55,7 @@ const NestedJSONGrid = (props) => {
 
   const renderTable = () => {
     return (
-        <table className={styles["json-table"]}>
+        <table className={styles["json-grid-table"]}>
           <tbody>
             {Object.keys(data).map((k) => (
               <tr key={k}>
