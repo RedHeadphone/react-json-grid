@@ -1,13 +1,4 @@
-.json-grid-table {
-  border-collapse: separate !important;
-  border-spacing: 0;
-  border: solid #b5b5b5 1px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: 0 1px 1px #ccc;
-  -moz-box-shadow: 0 1px 1px #ccc;
-  box-shadow: 0 1px 1px #ccc;
+.json-grid-container{
   margin: 0;
   font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -18,6 +9,18 @@
   color: #fff;
   text-align: left;
   background-color: #222;
+}
+
+.json-grid-table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+  border: solid #b5b5b5 1px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 1px #ccc;
+  -moz-box-shadow: 0 1px 1px #ccc;
+  box-shadow: 0 1px 1px #ccc;
 }
 .highlight {
   background-color: #3b3b3b;

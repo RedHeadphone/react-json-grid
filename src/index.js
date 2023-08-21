@@ -19,7 +19,7 @@ export const JSONGrid = (props) => {
   }, [wrapperRef, highlightedElement]);
 
   return (
-    <div ref={wrapperRef}>
+    <div className={styles["json-grid-container"]} ref={wrapperRef}>
       <NestedJSONGrid
         level={0}
         {...props}
@@ -49,8 +49,12 @@ const NestedJSONGrid = (props) => {
     if (highlightedElement != null) {
       highlightedElement.classList.remove(styles.highlight);
     }
-    e.currentTarget.classList.add(styles.highlight);
-    setHighlightedElement(e.currentTarget);
+    let nextHighlightElement = e.currentTarget;
+    if (e.currentTarget.hasAttribute("rowhighlight")) {
+      nextHighlightElement = e.currentTarget.parentElement;
+    }
+    nextHighlightElement.classList.add(styles.highlight);
+    setHighlightedElement(nextHighlightElement);
   };
 
   const renderTable = () => {
@@ -59,7 +63,13 @@ const NestedJSONGrid = (props) => {
           <tbody>
             {Object.keys(data).map((k) => (
               <tr key={k}>
-                {!Array.isArray(data) && (
+                {Array.isArray(data) ? (
+                  <td className={classnames(styles.obj,styles.order,styles.index)} 
+                    onClick={highlight}
+                    clickable="true"
+                    rowhighlight="true"
+                  >{parseInt(k)+1}</td>
+                ) : (
                   <td
                     className={classnames(styles.obj, styles.key, styles.name)}
                     onClick={highlight}
