@@ -1,7 +1,7 @@
-import JSONGrid from '.'
+import JSONGrid from ".";
 
-describe('JSONGrid', () => {
-  it('is truthy', () => {
-    expect(JSONGrid).toBeTruthy()
-  })
-})
+describe("JSONGrid", () => {
+  it("is truthy", () => {
+    expect(JSONGrid).toBeTruthy();
+  });
+});
