@@ -4,6 +4,7 @@ import classnames from "classnames";
 import menuIcon from "./menuIcon.svg";
 
 export const JSONGrid = (props) => {
+  const { data } = props;
   const [highlightedElement, setHighlightedElement] = useState(null);
   const wrapperRef = useRef(null);
 
@@ -23,7 +24,7 @@ export const JSONGrid = (props) => {
     <div className={styles["json-grid-container"]} ref={wrapperRef}>
       <NestedJSONGrid
         level={0}
-        {...props}
+        data={data}
         highlightedElement={highlightedElement}
         setHighlightedElement={setHighlightedElement}
       />
@@ -60,7 +61,33 @@ const NestedJSONGrid = (props) => {
     setHighlightedElement(nextHighlightElement);
   };
 
-  const renderValue = (key, value) => {
+  const checkAllObjects = (data) => {
+    let allObjects = false;
+    let keys;
+    if (Array.isArray(data)) {
+      allObjects = true;
+      keys = new Set();
+      for (let i = 0; i < data.length; i++) {
+        if (typeof data[i] !== "object" || Array.isArray(data[i])) {
+          allObjects = false;
+          break;
+        }
+        Object.keys(data[i]).forEach((k) => keys.add(k));
+      }
+      keys = Array.from(keys);
+      if (allObjects) {
+        for (let i = 0; i < data.length; i++) {
+          data[i] = keys.reduce((obj, key) => {
+            obj[key] = data[i][key] !== undefined ? data[i][key] : "-";
+            return obj;
+          }, {});
+        }
+      }
+    }
+    return { allObjects, keys };
+  };
+
+  const renderValue = (key, value, level) => {
     if (value && typeof value === "object")
       return (
         <td
@@ -93,29 +120,8 @@ const NestedJSONGrid = (props) => {
     );
   };
 
-  const renderTable = () => {
-    let allObjects = false;
-    let keys;
-    if (Array.isArray(data)) {
-      allObjects = true;
-      keys = new Set();
-      for (let i = 0; i < data.length; i++) {
-        if (typeof data[i] !== "object" || Array.isArray(data[i])) {
-          allObjects = false;
-          break;
-        }
-        Object.keys(data[i]).forEach((k) => keys.add(k));
-      }
-      keys = Array.from(keys);
-      if (allObjects) {
-        for (let i = 0; i < data.length; i++) {
-          data[i] = keys.reduce((obj, key) => {
-            obj[key] = data[i][key] !== undefined ? data[i][key] : "-";
-            return obj;
-          }, {});
-        }
-      }
-    }
+  const renderTable = (data, level) => {
+    const { allObjects, keys } = checkAllObjects(data);
 
     return (
       <table className={styles["json-grid-table"]}>
@@ -133,12 +139,11 @@ const NestedJSONGrid = (props) => {
                   className={classnames(styles.obj, styles.order)}
                   clickable="true"
                 >
-                  <div
-                    className={classnames(styles.glyphicon)}
+                  <img
+                    className={styles.glyphicon}
+                    src={menuIcon}
                     clickable="true"
-                  >
-                    <img src={menuIcon} clickable="true" />
-                  </div>
+                  />
                 </th>
                 {keys.map((k) => (
                   <th
@@ -181,8 +186,10 @@ const NestedJSONGrid = (props) => {
                 </td>
               )}
               {allObjects
-                ? Object.entries(data[k]).map(([kk, v]) => renderValue(kk, v))
-                : renderValue(k, data[k])}
+                ? Object.entries(data[k]).map(([kk, v]) =>
+                    renderValue(kk, v, level)
+                  )
+                : renderValue(k, data[k], level)}
             </tr>
           ))}
         </tbody>
@@ -205,10 +212,10 @@ const NestedJSONGrid = (props) => {
         <span className={styles.title}>
           {dataKey}&nbsp;{Array.isArray(data) ? `[${data.length}]` : "{}"}
         </span>
-        {open && renderTable()}
+        {open && renderTable(data, level)}
       </div>
     );
   }
 
-  return renderTable();
+  return renderTable(data, level);
 };
