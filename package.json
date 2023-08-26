@@ -9,8 +9,11 @@
     "react",
     "json",
     "grid",
-    "json-grid",
-    "react-json-grid"
+    "table",
+    "layout",
+    "component",
+    "render",
+    "ui"
   ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",

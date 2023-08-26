@@ -20,6 +20,8 @@ export const JSONGrid = (props) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [wrapperRef, highlightedElement]);
 
+  if (data == null)
+    throw new Error("JSONGrid: data prop cannot be null or undefined");
   return (
     <div className={styles["json-grid-container"]} ref={wrapperRef}>
       <NestedJSONGrid
