@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import styles from "./styles.css";
 import classnames from "classnames";
 import menuIcon from "./menuIcon.svg";
@@ -32,13 +32,8 @@ export const JSONGrid = (props) => {
 };
 
 const NestedJSONGrid = (props) => {
-  const {
-    level,
-    data,
-    dataKey,
-    highlightedElement,
-    setHighlightedElement
-  } = props;
+  const { level, data, dataKey, highlightedElement, setHighlightedElement } =
+    props;
 
   const highlight = (e) => {
     if (
@@ -52,6 +47,15 @@ const NestedJSONGrid = (props) => {
     let nextHighlightElement = e.currentTarget;
     if (e.currentTarget.hasAttribute("rowhighlight"))
       nextHighlightElement = e.currentTarget.parentElement;
+    else if (e.currentTarget.hasAttribute("colhighlight")) {
+      const colIndex = Array.prototype.indexOf.call(
+        e.currentTarget.parentElement.children,
+        e.currentTarget
+      );
+      nextHighlightElement =
+        e.currentTarget.parentElement.parentElement.previousElementSibling
+          .children[colIndex];
+    }
     nextHighlightElement.classList.add(styles.highlight);
     setHighlightedElement(nextHighlightElement);
   };
@@ -105,45 +109,68 @@ const NestedJSONGrid = (props) => {
       keys = Array.from(keys);
       if (allObjects) {
         for (let i = 0; i < data.length; i++) {
-          data[i] = keys.reduce(
-            (obj, key) => {
-              obj[key] = (data[i][key] !== undefined) ? data[i][key] : "-";
-              return obj;
-            },
-            {}
-          );
-        };
+          data[i] = keys.reduce((obj, key) => {
+            obj[key] = data[i][key] !== undefined ? data[i][key] : "-";
+            return obj;
+          }, {});
+        }
       }
     }
 
     return (
       <table className={styles["json-grid-table"]}>
-        {allObjects && (<thead>
-          <tr>
-            <th className={classnames(styles.obj, styles.order)} type="table">
-              <div className={classnames(styles.glyphicon)}>
-                <img src={menuIcon} />
-              </div>
-            </th>
-            {keys.map((k) => (
-              <th
-                className={classnames(styles.obj, styles.order, styles.name)}
-                key={k}
-              >
-                {k.replace(/_/g, " ")}
-              </th>
-            ))}
-          </tr>
-        </thead>)}
+        {allObjects && (
+          <Fragment>
+            <colgroup>
+              <col></col>
+              {keys.map((k) => (
+                <col key={k}></col>
+              ))}
+            </colgroup>
+            <thead>
+              <tr>
+                <th
+                  className={classnames(styles.obj, styles.order)}
+                  clickable="true"
+                >
+                  <div
+                    className={classnames(styles.glyphicon)}
+                    clickable="true"
+                  >
+                    <img src={menuIcon} clickable="true" />
+                  </div>
+                </th>
+                {keys.map((k) => (
+                  <th
+                    className={classnames(
+                      styles.obj,
+                      styles.order,
+                      styles.name
+                    )}
+                    key={k}
+                    onClick={highlight}
+                    clickable="true"
+                    colhighlight="true"
+                  >
+                    {k.replace(/_/g, " ")}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+          </Fragment>
+        )}
         <tbody>
           {Object.keys(data).map((k) => (
             <tr key={k}>
               {Array.isArray(data) ? (
-                <td className={classnames(styles.obj, styles.order, styles.index)}
+                <td
+                  className={classnames(styles.obj, styles.order, styles.index)}
                   onClick={highlight}
                   clickable="true"
                   rowhighlight="true"
-                >{parseInt(k) + 1}</td>
+                >
+                  {parseInt(k) + 1}
+                </td>
               ) : (
                 <td
                   className={classnames(styles.obj, styles.key, styles.name)}
@@ -153,7 +180,8 @@ const NestedJSONGrid = (props) => {
                   {k.replace(/_/g, " ")}
                 </td>
               )}
-              {allObjects ? Object.entries(data[k]).map(([kk, v]) => renderValue(kk, v))
+              {allObjects
+                ? Object.entries(data[k]).map(([kk, v]) => renderValue(kk, v))
                 : renderValue(k, data[k])}
             </tr>
           ))}
