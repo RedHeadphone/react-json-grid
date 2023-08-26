@@ -72,6 +72,7 @@ The JSONGrid component supports the following props:
 | -------- | -------- | ------------------------------------------------------------------ | ----------- |
 | data     | object   | The JSON object or array to be transformed into a grid table.      | undefined   |
 
+
 ## Contributing
 
 Please kindly follow [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
