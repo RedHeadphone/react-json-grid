@@ -18,7 +18,7 @@ Pull requests are the best way to propose changes. We actively welcome your pull
 
 ## Local Development
 
-To run & test react-json-grid, you need to follow a few simple steps:-
+To run & test react-json-grid, you need to follow a few simple steps (you can use `yarn` instead of `npm`):-
 
 1.  Fork the repository and clone the code to your local machine.
 2.  Run `npm install` in the repository root and demo directory.
