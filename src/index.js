@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import styles from "./styles.css";
-import classnames from "classnames";
 import menuIcon from "./menuIcon.svg";
+
+function classnames(...args) {
+  return args.filter(Boolean).join(" ");
+}
 
 export const JSONGrid = (props) => {
   const { data } = props;
