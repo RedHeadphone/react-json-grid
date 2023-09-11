@@ -19,6 +19,12 @@ export default {
       file: pkg.module,
       format: 'es',
       sourcemap: true
+    },
+    {
+      file: pkg.browser,
+      format: 'umd',
+      name: 'react-json-grid',
+      sourcemap: true
     }
   ],
   plugins: [

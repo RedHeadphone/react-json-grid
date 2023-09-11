@@ -1,6 +1,16 @@
-# react-json-grid
+# React JSON Grid
 
-<img src="https://raw.githubusercontent.com/RedHeadphone/react-json-grid/master/assets/images/github-banner.png">
+<p align="center">
+  <img src="https://raw.githubusercontent.com/RedHeadphone/react-json-grid/master/assets/images/github-banner.png">
+</p>
+
+<p align="center">
+  Interactive demos available below!<br>
+  <a href="https://codepen.io/redheadphone/pen/rNoyrgW"><img alt="CodePen" src="https://img.shields.io/badge/CodePen-8A2BE2?logo=codepen"></a>
+  <a href="https://codesandbox.io/s/react-json-grid-demo-7ymdg3"><img alt="CodeSandbox" src="https://img.shields.io/badge/CodeSandbox-4ea94b?logo=codesandbox"></a>
+  <a href="https://stackblitz.com/edit/react-json-grid-7hyzqq"><img alt="Stackblitz" src="https://img.shields.io/badge/Stackblitz-blue?logo=stackblitz"></a>
+</p>
+
 
 The library react-json-grid provides the React component JSONGrid, which is a user-friendly and versatile tool that enables you to effortlessly transform nested JSON objects or arrays into visually appealing grid tables. Whether you're working on a data visualization project or simply need to present complex JSON data in an organized manner, this component has got you covered.
 
@@ -8,7 +18,7 @@ The library react-json-grid provides the React component JSONGrid, which is a us
 
 - **Ease of Integration**: Seamlessly incorporate the component into your React applications without any hassle.
 - **Nested JSON Support**: Handle deeply nested JSON structures with ease, creating structured grid tables.
-- **Interactive Interface**: Provide users with an interactive and user-friendly way to explore complex data.
+- **Highlight Magic**: Select and highlight specific cells, rows, or columns in the grid tables for better data exploration.
 <!-- - **Customizable Styling**: Tailor the appearance of the grid to match your application's design using custom CSS. -->
 
 ## Install
