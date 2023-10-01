@@ -10,7 +10,7 @@ export function lookup(obj, searchText) {
   if (typeof obj !== "object") return null;
 
   for (const key in obj) {
-    if (!Array.isArray(obj) && key.toString().toLowerCase().includes(searchText.toLowerCase())) {
+    if (!Array.isArray(obj) && matchesText(key,searchText) ) {
       matchesInKey = true;
     }
 
@@ -20,7 +20,7 @@ export function lookup(obj, searchText) {
         keyTree[key] = nestedKeyTree;
       }
     } else {
-      if (obj[key].toString().toLowerCase().includes(searchText.toLowerCase())) {
+      if (matchesText(obj[key],searchText)) {
         keyTree[key] = true;
       }
     }
@@ -34,10 +34,15 @@ export function lookup(obj, searchText) {
     return null;
 }
 
+export function matchesText(obj, searchText) {
+  return obj.toString().toLowerCase().includes(searchText.toLowerCase())
+}
+
 export function mergeKeyTrees(keyTree1, keyTree2) {
-  if (keyTree1 === true || keyTree2 === true) return true;
   if (keyTree1 == null) return keyTree2;
   if (keyTree2 == null) return keyTree1;
+  if (keyTree1 === true) return keyTree2;
+  if (keyTree2 === true) return keyTree1;
 
   const mergedKeyTree = {};
   for (const key in keyTree1) {

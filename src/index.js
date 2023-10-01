@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import styles from "./styles.css";
 import menuIcon from "./menuIcon.svg";
-import { classnames, lookup, mergeKeyTrees, checkAllObjects } from "./utils";
+import { classnames, lookup, matchesText, mergeKeyTrees, checkAllObjects } from "./utils";
 
 export const JSONGrid = (props) => {
   let { data, defaultExpandDepth, defaultExpandKeyTree, searchText } = props;
@@ -123,9 +123,8 @@ const NestedJSONGrid = (props) => {
         key={key}
       >
         <span
-          className={styles[typeof value]}
-          dangerouslySetInnerHTML={{ __html: value }}
-        />
+          className={classnames(styles[typeof value],matchesText(value,searchText) && styles["search-highlight"])}
+        >{value.toString()}</span>
       </td>
     );
   };
@@ -167,7 +166,7 @@ const NestedJSONGrid = (props) => {
                     clickable="true"
                     colhighlight="true"
                   >
-                    {k.replace(/_/g, " ")}
+                    <span className={matchesText(k,searchText) ? styles["search-highlight"] : undefined}>{k.replace(/_/g, " ")}</span>
                   </th>
                 ))}
               </tr>
@@ -192,12 +191,12 @@ const NestedJSONGrid = (props) => {
                   onClick={highlight}
                   clickable="true"
                 >
-                  {k.replace(/_/g, " ")}
+                  <span className={matchesText(k,searchText) ? styles["search-highlight"] : undefined}>{k.replace(/_/g, " ")}</span>
                 </td>
               )}
               {allObjects
                 ? Object.entries(data[k]).map(([kk, v]) =>
-                    renderValue(kk, v, level, defaultExpandKeyTree[k])
+                    renderValue(kk, v, level, defaultExpandKeyTree && defaultExpandKeyTree[k])
                   )
                 : renderValue(k, data[k], level, defaultExpandKeyTree)}
             </tr>
