@@ -78,7 +78,7 @@ function App() {
 
   return (
     <div className="json-grid-container">
-      <JSONGrid data={data} defaultExpandKeyTree={keyTree}/>
+      <JSONGrid data={data} searchText={"er"} defaultExpandKeyTree={keyTree}/>
     </div>
   );
 }
