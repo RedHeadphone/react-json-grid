@@ -19,6 +19,7 @@ The library react-json-grid provides the React component JSONGrid, which is a us
 - **Ease of Integration**: Seamlessly incorporate the component into your React applications without any hassle and no dependencies.
 - **Nested JSON Support**: Handle deeply nested JSON structures with ease, creating nested structured grid tables that are collapsible and expandible.
 - **Highlight Magic**: Select and highlight specific cells, rows, or columns in the grid tables to enhance the user interface and facilitate interaction.
+- **Search Spotlight**: Enhance the visibility of your JSON data with a search feature that effectively highlights cells matching with the search text.
 <!-- - **Customizable Styling**: Tailor the appearance of the grid to match your application's design using custom CSS. -->
 
 ## Install
@@ -78,10 +79,12 @@ class Example extends Component {
 
 The JSONGrid component supports the following props:
 
-| Name               | Type     | Description                                                        | Default     |
-| ------------------ | -------- | ------------------------------------------------------------------ | ----------- |
-| data               | object   | The JSON object or array to be transformed into a grid table.      | undefined   |
-| defaultExpandDepth | number   | The depth to which the grid is expanded by default.                | 0           |
+| Name                  | Type     | Description                                                        | Default     |
+| --------------------- | -------- | ------------------------------------------------------------------ | ----------- |
+| data                  | object   | The JSON object or array to be transformed into a grid table.      | undefined   |
+| defaultExpandDepth    | number   | The depth to which the grid is expanded by default.                | 0           |
+| defaultExpandKeyTree  | object   | Tree-like structure with all keys that needs to be expanded.       | undefined   |
+| searchText            | string   | The text that needs to be searched in the JSON data.               | undefined   |
 
 ## Contributing
 
