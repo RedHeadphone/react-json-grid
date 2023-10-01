@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import styles from "./styles.css";
 import menuIcon from "./menuIcon.svg";
-
-function classnames(...args) {
-  return args.filter(Boolean).join(" ");
-}
+import { classnames, lookup, mergeKeyTrees, checkAllObjects } from "./utils";
 
 export const JSONGrid = (props) => {
-  let { data, defaultExpandDepth, defaultExpandKeyTree } = props;
+  let { data, defaultExpandDepth, defaultExpandKeyTree, searchText } = props;
   const [highlightedElement, setHighlightedElement] = useState(null);
   const wrapperRef = useRef(null);
 
@@ -44,6 +41,14 @@ export const JSONGrid = (props) => {
       throw new Error("JSONGrid: defaultExpandKeyTree prop must not be an array");
   }
 
+  if (searchText != null){
+    if (typeof searchText !== "string")
+      throw new Error("JSONGrid: searchText prop must be a string");
+
+    const searchKeyTree = lookup(data, searchText);
+    defaultExpandKeyTree = mergeKeyTrees(defaultExpandKeyTree, searchKeyTree);
+  }
+
 
   return (
     <div className={styles["json-grid-container"]} ref={wrapperRef}>
@@ -54,13 +59,14 @@ export const JSONGrid = (props) => {
         setHighlightedElement={setHighlightedElement}
         defaultExpandDepth={defaultExpandDepth}
         defaultExpandKeyTree={defaultExpandKeyTree}
+        searchText={searchText}
       />
     </div>
   );
 };
 
 const NestedJSONGrid = (props) => {
-  const { level, data, dataKey, highlightedElement, setHighlightedElement, defaultExpandDepth, defaultExpandKeyTree } =
+  const { level, data, dataKey, highlightedElement, setHighlightedElement, defaultExpandDepth, defaultExpandKeyTree, searchText } =
     props;
 
   const highlight = (e) => {
@@ -88,33 +94,7 @@ const NestedJSONGrid = (props) => {
     setHighlightedElement(nextHighlightElement);
   };
 
-  const checkAllObjects = (data) => {
-    let allObjects = false;
-    let keys;
-    if (Array.isArray(data)) {
-      allObjects = true;
-      keys = new Set();
-      for (let i = 0; i < data.length; i++) {
-        if (typeof data[i] !== "object" || Array.isArray(data[i])) {
-          allObjects = false;
-          break;
-        }
-        Object.keys(data[i]).forEach((k) => keys.add(k));
-      }
-      keys = Array.from(keys);
-      if (allObjects) {
-        for (let i = 0; i < data.length; i++) {
-          data[i] = keys.reduce((obj, key) => {
-            obj[key] = data[i][key] !== undefined ? data[i][key] : "-";
-            return obj;
-          }, {});
-        }
-      }
-    }
-    return { allObjects, keys };
-  };
-
-  const renderValue = (key, value, level) => {
+  const renderValue = (key, value, level, keyTree) => {
     if (value && typeof value === "object")
       return (
         <td
@@ -130,7 +110,8 @@ const NestedJSONGrid = (props) => {
             highlightedElement={highlightedElement}
             setHighlightedElement={setHighlightedElement}
             defaultExpandDepth={defaultExpandDepth}
-            defaultExpandKeyTree={defaultExpandKeyTree && defaultExpandKeyTree[key]}
+            defaultExpandKeyTree={keyTree && keyTree[key]}
+            searchText={searchText}
           />
         </td>
       );
@@ -216,9 +197,9 @@ const NestedJSONGrid = (props) => {
               )}
               {allObjects
                 ? Object.entries(data[k]).map(([kk, v]) =>
-                    renderValue(kk, v, level)
+                    renderValue(kk, v, level, defaultExpandKeyTree[k])
                   )
-                : renderValue(k, data[k], level)}
+                : renderValue(k, data[k], level, defaultExpandKeyTree)}
             </tr>
           ))}
         </tbody>
