@@ -7,7 +7,7 @@ function classnames(...args) {
 }
 
 export const JSONGrid = (props) => {
-  const { data } = props;
+  let { data, defaultExpandDepth } = props;
   const [highlightedElement, setHighlightedElement] = useState(null);
   const wrapperRef = useRef(null);
 
@@ -25,6 +25,18 @@ export const JSONGrid = (props) => {
 
   if (data == null)
     throw new Error("JSONGrid: data prop cannot be null or undefined");
+  if (typeof data !== "object")
+    throw new Error("JSONGrid: data prop must be an object or an array");
+
+  if (defaultExpandDepth != null){
+    if (typeof defaultExpandDepth !== "number")
+      throw new Error("JSONGrid: defaultExpandDepth prop must be a number");
+    if (defaultExpandDepth < 0)
+      throw new Error("JSONGrid: defaultExpandDepth prop must not be a negative number");
+  } else {
+    defaultExpandDepth = 0;
+  }
+
   return (
     <div className={styles["json-grid-container"]} ref={wrapperRef}>
       <NestedJSONGrid
@@ -32,13 +44,14 @@ export const JSONGrid = (props) => {
         data={data}
         highlightedElement={highlightedElement}
         setHighlightedElement={setHighlightedElement}
+        defaultExpandDepth={defaultExpandDepth}
       />
     </div>
   );
 };
 
 const NestedJSONGrid = (props) => {
-  const { level, data, dataKey, highlightedElement, setHighlightedElement } =
+  const { level, data, dataKey, highlightedElement, setHighlightedElement, defaultExpandDepth } =
     props;
 
   const highlight = (e) => {
@@ -107,6 +120,7 @@ const NestedJSONGrid = (props) => {
             data={value}
             highlightedElement={highlightedElement}
             setHighlightedElement={setHighlightedElement}
+            defaultExpandDepth={defaultExpandDepth}
           />
         </td>
       );
@@ -203,7 +217,7 @@ const NestedJSONGrid = (props) => {
   };
 
   if (level !== 0) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(level<=defaultExpandDepth);
 
     return (
       <div className={styles.box}>
