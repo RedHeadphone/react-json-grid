@@ -35,6 +35,8 @@ export function lookup(obj, searchText) {
 }
 
 export function matchesText(obj, searchText) {
+  if (searchText == null)
+    return false;
   return obj.toString().toLowerCase().includes(searchText.toLowerCase())
 }
 
