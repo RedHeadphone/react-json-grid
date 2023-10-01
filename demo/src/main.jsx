@@ -76,7 +76,7 @@ function App() {
 
   return (
     <div className="json-grid-container">
-      <JSONGrid data={data} />
+      <JSONGrid data={data} defaultExpandDepth={1}/>
     </div>
   );
 }
