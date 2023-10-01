@@ -74,9 +74,11 @@ function App() {
     ]
   };
 
+  const keyTree = {"leader":true};
+
   return (
     <div className="json-grid-container">
-      <JSONGrid data={data} defaultExpandDepth={1}/>
+      <JSONGrid data={data} defaultExpandKeyTree={keyTree}/>
     </div>
   );
 }
