@@ -7,7 +7,7 @@ function classnames(...args) {
 }
 
 export const JSONGrid = (props) => {
-  let { data, defaultExpandDepth } = props;
+  let { data, defaultExpandDepth, defaultExpandKeyTree } = props;
   const [highlightedElement, setHighlightedElement] = useState(null);
   const wrapperRef = useRef(null);
 
@@ -37,6 +37,14 @@ export const JSONGrid = (props) => {
     defaultExpandDepth = 0;
   }
 
+  if (defaultExpandKeyTree != null){
+    if (typeof defaultExpandKeyTree !== "object")
+      throw new Error("JSONGrid: defaultExpandKeyTree prop must be an object");
+    if (Array.isArray(defaultExpandKeyTree))
+      throw new Error("JSONGrid: defaultExpandKeyTree prop must not be an array");
+  }
+
+
   return (
     <div className={styles["json-grid-container"]} ref={wrapperRef}>
       <NestedJSONGrid
@@ -45,13 +53,14 @@ export const JSONGrid = (props) => {
         highlightedElement={highlightedElement}
         setHighlightedElement={setHighlightedElement}
         defaultExpandDepth={defaultExpandDepth}
+        defaultExpandKeyTree={defaultExpandKeyTree}
       />
     </div>
   );
 };
 
 const NestedJSONGrid = (props) => {
-  const { level, data, dataKey, highlightedElement, setHighlightedElement, defaultExpandDepth } =
+  const { level, data, dataKey, highlightedElement, setHighlightedElement, defaultExpandDepth, defaultExpandKeyTree } =
     props;
 
   const highlight = (e) => {
@@ -121,6 +130,7 @@ const NestedJSONGrid = (props) => {
             highlightedElement={highlightedElement}
             setHighlightedElement={setHighlightedElement}
             defaultExpandDepth={defaultExpandDepth}
+            defaultExpandKeyTree={defaultExpandKeyTree && defaultExpandKeyTree[key]}
           />
         </td>
       );
@@ -217,7 +227,7 @@ const NestedJSONGrid = (props) => {
   };
 
   if (level !== 0) {
-    const [open, setOpen] = useState(level<=defaultExpandDepth);
+    const [open, setOpen] = useState(level<=defaultExpandDepth || defaultExpandKeyTree);
 
     return (
       <div className={styles.box}>
