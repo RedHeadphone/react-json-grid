@@ -12,18 +12,18 @@
 </p>
 
 
-The library react-json-grid provides the React component JSONGrid, which is a user-friendly and versatile tool that enables you to effortlessly transform nested JSON objects or arrays into visually appealing grid tables. Whether you're working on a data visualization project or simply need to present complex JSON data in an organized manner, this component has got you covered.
+The library react-json-grid provides the React component JSONGrid, which is a user-friendly and versatile tool that enables you to effortlessly transform nested JSON objects or arrays into structured nested grid tables. This component has got you covered when dealing with big and complex JSON data, allowing you to display it in an organized manner.
 
 ## Features
 
-- **Ease of Integration**: Seamlessly incorporate the component into your React applications without any hassle.
-- **Nested JSON Support**: Handle deeply nested JSON structures with ease, creating structured grid tables.
-- **Highlight Magic**: Select and highlight specific cells, rows, or columns in the grid tables for better data exploration.
+- **Ease of Integration**: Seamlessly incorporate the component into your React applications without any hassle and no dependencies.
+- **Nested JSON Support**: Handle deeply nested JSON structures with ease, creating nested structured grid tables that are collapsible and expandible.
+- **Highlight Magic**: Select and highlight specific cells, rows, or columns in the grid tables to enhance the user interface and facilitate interaction.
 <!-- - **Customizable Styling**: Tailor the appearance of the grid to match your application's design using custom CSS. -->
 
 ## Install
 
-Run either one in your React directory:
+Run either one in your React project directory:
 ```bash
 npm install @redheadphone/react-json-grid
 ```
@@ -78,10 +78,10 @@ class Example extends Component {
 
 The JSONGrid component supports the following props:
 
-| Name     | Type     | Description                                                        | Default     |
-| -------- | -------- | ------------------------------------------------------------------ | ----------- |
-| data     | object   | The JSON object or array to be transformed into a grid table.      | undefined   |
-
+| Name               | Type     | Description                                                        | Default     |
+| ------------------ | -------- | ------------------------------------------------------------------ | ----------- |
+| data               | object   | The JSON object or array to be transformed into a grid table.      | undefined   |
+| defaultExpandDepth | number   | The depth to which the grid is expanded by default.                | 0           |
 
 ## Contributing
 
