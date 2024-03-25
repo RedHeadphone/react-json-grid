@@ -23,6 +23,7 @@
     "dist"
   ],
   "scripts": {
+    "demo": "cd demo && npm run start",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "build": "rollup -c",
     "dev": "rollup -c -w",
