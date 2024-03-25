@@ -77,7 +77,7 @@ function App() {
   const keyTree = {"leader":true};
 
   return (
-    <div className="json-grid-container">
+    <div className="demo-container">
       <JSONGrid data={data} searchText={"mcc"} defaultExpandKeyTree={keyTree}/>
     </div>
   );

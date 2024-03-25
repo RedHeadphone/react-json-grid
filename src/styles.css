@@ -3,7 +3,6 @@
   margin: 0;
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
   line-height: 1.5;
-  color: #fff;
   text-align: left;
   background-color: #222;
 }
@@ -12,8 +11,11 @@
   border-collapse: separate;
   border-spacing: 0;
   border: solid #b5b5b5 1px;
+}
+
+.json-grid-container, .json-grid-table{
   border-radius: 3px;
-  box-shadow: 0 1px 1px #ccc;
+  overflow: hidden;
 }
 
 .highlight {
@@ -24,8 +26,13 @@
 .obj {
   border: 1px solid #474747;
   padding: 3px 10px;
+  padding-bottom: 4px;
   cursor: pointer;
   white-space: nowrap;
+}
+
+.obj {
+  color: white;
 }
 
 .obj .name {
@@ -71,6 +78,7 @@
 .search-highlight {
   background-color: #565a36;
   padding: 1px 5px;
+  padding-top: 0px;
   border-radius: 2px;
 }
 
