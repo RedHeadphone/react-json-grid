@@ -23,7 +23,7 @@ To run & test react-json-grid, you need to follow a few simple steps (you can us
 1.  Fork the repository and clone the code to your local machine.
 2.  Run `npm install` in the repository root and demo directory.
 3.  Run `npm link` in the repository root. And then run `npm link @redheadphone/react-json-grid` in the demo directory.
-3.  Run the command `npm run dev` to start the development server for react-json-grid package. And run `npm start` in the demo directory to start the demo server at <http://localhost:5173>.
+3.  Run the command `npm run dev` to start the development server for react-json-grid package. And run `npm run demo` to start the demo server at <http://localhost:5173>.
 
 ## Any contributions you make will be under the MIT Software License
 

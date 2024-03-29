@@ -1,85 +1,105 @@
 .json-grid-container {
+  --jg-bg-color: #222;
+  --jg-table-border-color: #b5b5b5;
+  --jg-highlight-bg-color: #3b3b3b;
+  --jg-cell-border-color: #474747;
+
+  --jg-key-name-color: #ffffff;
+  --jg-index-color: #949494;
+  --jg-number-color: #6c99bb;
+  --jg-boolean-color: #6c99bb;
+  --jg-string-color: #a5c261;
+  --jg-object-color: #ffffff;
+
+  --jg-table-header-bg-color: #444;
+  --jg-table-header-color: #ffffff;
+
+  --jg-search-highlight-bg-color: #565a36;
+
   display: inline-block;
   margin: 0;
-  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
-  font-size: 0.9375rem;
-  font-weight: 400;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
   line-height: 1.5;
-  color: #fff;
   text-align: left;
-  background-color: #222;
+  background-color: var(--jg-bg-color);
 }
 
 .json-grid-table {
-  border-collapse: separate !important;
+  border-collapse: separate;
   border-spacing: 0;
-  border: solid #b5b5b5 1px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-box-shadow: 0 1px 1px #ccc;
-  -moz-box-shadow: 0 1px 1px #ccc;
-  box-shadow: 0 1px 1px #ccc;
+  border: solid var(--jg-table-border-color) 1px;
 }
+
+.json-grid-container, .json-grid-table{
+  border-radius: 3px;
+  overflow: hidden;
+}
+
 .highlight {
-  background-color: #3b3b3b;
+  background-color: var(--jg-highlight-bg-color);
   font-weight: bold;
 }
+
 .obj {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  border: 1px solid #474747;
-  padding: 3px 10px 3px 10px;
+  border: 1px solid var(--jg-cell-border-color);
+  padding: 3px 10px;
+  padding-bottom: 4px;
   cursor: pointer;
   white-space: nowrap;
 }
-.obj .name {
-  color: white;
+
+.obj, .obj .name {
+  color: var(--jg-key-name-color);
 }
+
 .obj .index {
-  color: #949494;
+  color: var(--jg-index-color);
 }
-.obj .string {
-  color: #a5c261;
+
+.obj .number{
+  color: var(--jg-number-color);
 }
-.obj .number {
-  color: #6c99bb;
-}
+
 .obj .boolean {
-  color: #6c99bb;
+  color: var(--jg-boolean-color);
 }
+
+.obj .string {
+  color: var(--jg-string-color);
+}
+
 .obj .object {
-  color: white;
+  color: var(--jg-object-color);
 }
+
 .order {
-  background-color: #444;
-  color: White;
+  background-color: var(--jg-table-header-bg-color);
+  color: var(--jg-table-header-color);
 }
+
 .key {
   vertical-align: top;
 }
+
 .title {
   font-weight: bold;
 }
+
 .plusminus {
   font-size: 15px;
   cursor: pointer;
   margin-right: 2px;
 }
+
 .search-highlight {
-  background-color: #565a36;
-  padding: 1px 5px 1px 5px;
+  background-color: var(--jg-search-highlight-bg-color);
+  padding: 1px 5px;
+  padding-top: 0px;
   border-radius: 2px;
 }
+
 .glyphicon {
   position: relative;
   top: 3px;
   display: inline-block;
-  font-family: "Glyphicons Halflings";
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }

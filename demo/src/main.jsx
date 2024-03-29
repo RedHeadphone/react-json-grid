@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { JSONGrid } from "@redheadphone/react-json-grid";
+import JSONGrid from "@redheadphone/react-json-grid";
 
 function App() {
   const data = {
@@ -16,7 +16,7 @@ function App() {
       eyeColor: "blue",
       name: "Lela Ramos",
       gender: "female",
-      registered: "2014-02-24T03:13:50 +05:00"
+      registered: "2014-02-24T03:13:50 +05:00",
     },
     members: [
       {
@@ -25,7 +25,7 @@ function App() {
         eyeColor: "blue",
         name: "Bentley Clayton",
         gender: "male",
-        registered: "2018-05-02T05:35:41 +04:00"
+        registered: "2018-05-02T05:35:41 +04:00",
       },
       {
         index: 1,
@@ -34,7 +34,7 @@ function App() {
         eyeColor: "blue",
         name: "Lela Ramos",
         gender: "female",
-        registered: "2014-02-24T03:13:50 +05:00"
+        registered: "2014-02-24T03:13:50 +05:00",
       },
       {
         index: 2,
@@ -43,7 +43,7 @@ function App() {
         eyeColor: "green",
         name: "Milagros Becker",
         gender: "female",
-        registered: "2016-10-22T12:18:50 +04:00"
+        registered: "2016-10-22T12:18:50 +04:00",
       },
       {
         index: 3,
@@ -52,7 +52,7 @@ function App() {
         eyeColor: "brown",
         name: "Mccoy Barrera",
         gender: "male",
-        registered: "2016-12-03T03:44:57 +05:00"
+        registered: "2016-12-03T03:44:57 +05:00",
       },
       {
         index: 4,
@@ -61,7 +61,7 @@ function App() {
         eyeColor: "brown",
         name: "Morton Bennett",
         gender: "male",
-        registered: "2015-10-06T09:48:03 +04:00"
+        registered: "2015-10-06T09:48:03 +04:00",
       },
       {
         index: 5,
@@ -69,22 +69,24 @@ function App() {
         age: 20,
         name: "Acosta Bird",
         gender: "male",
-        registered: "2019-02-11T09:59:58 +05:00"
-      }
-    ]
+        registered: "2019-02-11T09:59:58 +05:00",
+      },
+    ],
   };
 
-  const keyTree = {"leader":true};
+  const keyTree = { leader: true };
 
   return (
-    <div className="json-grid-container">
-      <JSONGrid data={data} searchText={"er"} defaultExpandKeyTree={keyTree}/>
+    <div className="demo-container">
+      <JSONGrid
+        data={data}
+        searchText={"ben"}
+        theme={"blueberryDark"}
+        customTheme={{ numberColor: "white" }}
+        defaultExpandKeyTree={keyTree}
+      />
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
