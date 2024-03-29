@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import styles from "./styles.css";
-import menuIcon from "./menuIcon.svg";
+import themes from "./themes";
 import { classnames, lookup, matchesText, mergeKeyTrees, checkAllObjects } from "./utils";
 
 export const JSONGrid = (props) => {
-  let { data, defaultExpandDepth, defaultExpandKeyTree, searchText } = props;
+  let { data, defaultExpandDepth, defaultExpandKeyTree, searchText, theme = "default", customTheme = {} } = props;
   const [highlightedElement, setHighlightedElement] = useState(null);
   const wrapperRef = useRef(null);
 
@@ -49,9 +49,29 @@ export const JSONGrid = (props) => {
     defaultExpandKeyTree = mergeKeyTrees(defaultExpandKeyTree, searchKeyTree);
   }
 
+  if (themes[theme] == null){
+    throw new Error(`JSONGrid: theme prop must be one of ${Object.keys(themes).join(", ")}`);
+  }
+
+  const themeDetails = themes[theme];
+  const themeStyles = {
+    "--jg-bg-color": customTheme.bgColor || themeDetails.bgColor,
+    "--jg-table-border-color": customTheme.tableBorderColor || themeDetails.tableBorderColor,
+    "--jg-highlight-bg-color": customTheme.highlightBgColor || themeDetails.highlightBgColor,
+    "--jg-cell-border-color": customTheme.cellBorderColor || themeDetails.cellBorderColor,
+    "--jg-key-name-color": customTheme.keyNameColor || themeDetails.keyNameColor,
+    "--jg-index-color": customTheme.indexColor || themeDetails.indexColor,
+    "--jg-number-color": customTheme.numberColor || themeDetails.numberColor,
+    "--jg-boolean-color": customTheme.booleanColor || themeDetails.booleanColor,
+    "--jg-string-color": customTheme.stringColor || themeDetails.stringColor,
+    "--jg-object-color": customTheme.objectColor || themeDetails.objectColor,
+    "--jg-table-header-bg-color": customTheme.tableHeaderBgColor || themeDetails.tableHeaderBgColor,
+    "--jg-table-header-color": customTheme.tableHeaderColor || themeDetails.tableHeaderColor,
+    "--jg-search-highlight-bg-color": customTheme.searchHighlightBgColor || themeDetails.searchHighlightBgColor,
+  };
 
   return (
-    <div className={styles["json-grid-container"]} ref={wrapperRef}>
+    <div className={styles["json-grid-container"]} style={themeStyles} ref={wrapperRef}>
       <NestedJSONGrid
         level={0}
         data={data}
@@ -148,11 +168,10 @@ const NestedJSONGrid = (props) => {
                   className={classnames(styles.obj, styles.order)}
                   clickable="true"
                 >
-                  <img
-                    className={styles.glyphicon}
-                    src={menuIcon}
-                    clickable="true"
-                  />
+                  <svg className={styles.glyphicon} clickable="true" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                    <path fill="currentColor"
+                      d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+                  </svg>
                 </th>
                 {keys.map((k) => (
                   <th
