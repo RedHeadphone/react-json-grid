@@ -40,7 +40,7 @@ Here's an example of how to use the react-json-grid library:
 
 ```jsx
 import React, { Component } from 'react'
-import { JSONGrid } from '@redheadphone/react-json-grid'
+import JSONGrid from '@redheadphone/react-json-grid'
 
 class Example extends Component {
   render () {
@@ -147,8 +147,6 @@ The JSONGrid component supports the following props:
 Note: Pass one of above themes as a string in the theme prop. You can contribute your custom theme in [themes.js](src/themes.js)
 
 ### Custom Theme Object Format
-
-Custom Theme Object :
 
 ```json
 {

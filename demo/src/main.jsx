@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { JSONGrid } from "@redheadphone/react-json-grid";
+import JSONGrid from "@redheadphone/react-json-grid";
 
 function App() {
   const data = {
@@ -80,8 +80,8 @@ function App() {
     <div className="demo-container">
       <JSONGrid
         data={data}
-        searchText={"mcc"}
-        theme={"cyberpunk"}
+        searchText={"ben"}
+        theme={"blueberryDark"}
         customTheme={{ numberColor: "white" }}
         defaultExpandKeyTree={keyTree}
       />
