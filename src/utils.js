@@ -37,7 +37,7 @@ export function lookup(obj, searchText) {
 export function matchesText(obj, searchText) {
   if (searchText == null)
     return false;
-  return obj.toString().toLowerCase().includes(searchText.toLowerCase())
+  return String(obj).toLowerCase().includes(searchText.toLowerCase())
 }
 
 export function mergeKeyTrees(keyTree1, keyTree2) {

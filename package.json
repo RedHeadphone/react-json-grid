@@ -1,6 +1,6 @@
 {
   "name": "@redheadphone/react-json-grid",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "React Component that converts JSON to nested grid tables.",
   "author": "Huzaifa Khilawala",
   "license": "MIT",
