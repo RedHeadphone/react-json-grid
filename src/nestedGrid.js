@@ -73,7 +73,7 @@ const NestedJSONGrid = (props) => {
             matchesText(value, searchText) && styles["search-highlight"]
           )}
         >
-          {value.toString()}
+          {String(value)}
         </span>
       </td>
     );
