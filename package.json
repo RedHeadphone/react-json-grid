@@ -1,6 +1,6 @@
 {
   "name": "@redheadphone/react-json-grid",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "React Component that converts JSON to nested grid tables.",
   "author": "Huzaifa Khilawala",
   "license": "MIT",
@@ -33,7 +33,7 @@
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "engines": {
     "node": ">=8",
