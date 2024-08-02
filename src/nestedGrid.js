@@ -5,9 +5,12 @@ import { classnames, matchesText, checkAllObjects } from "./utils";
 const NestedJSONGrid = (props) => {
   const {
     level,
+    keyPath,
     data,
     dataKey,
     highlightedElement,
+    highlightSelected,
+    onSelect,
     setHighlightedElement,
     defaultExpandDepth,
     defaultExpandKeyTree,
@@ -35,11 +38,13 @@ const NestedJSONGrid = (props) => {
         e.currentTarget.parentElement.parentElement.previousElementSibling
           .children[colIndex];
     }
-    nextHighlightElement.classList.add(styles.highlight);
+    if (highlightSelected) 
+      nextHighlightElement.classList.add(styles.highlight);
     setHighlightedElement(nextHighlightElement);
+    onSelect(keyPath);
   };
 
-  const renderValue = (key, value, level, keyTree) => {
+  const renderValue = (key, value, level, keyTree, nextKeyPath) => {
     if (value && typeof value === "object")
       return (
         <td
@@ -50,9 +55,12 @@ const NestedJSONGrid = (props) => {
         >
           <NestedJSONGrid
             level={level + 1}
+            keyPath={keyPath.concat(nextKeyPath)}
             dataKey={key}
             data={value}
             highlightedElement={highlightedElement}
+            highlightSelected={highlightSelected}
+            onSelect={onSelect}
             setHighlightedElement={setHighlightedElement}
             defaultExpandDepth={defaultExpandDepth}
             defaultExpandKeyTree={keyTree && keyTree[key]}
@@ -173,10 +181,11 @@ const NestedJSONGrid = (props) => {
                       kk,
                       v,
                       level,
-                      defaultExpandKeyTree && defaultExpandKeyTree[k]
+                      defaultExpandKeyTree && defaultExpandKeyTree[k],
+                      [k,kk]
                     )
                   )
-                : renderValue(k, data[k], level, defaultExpandKeyTree)}
+                : renderValue(k, data[k], level, defaultExpandKeyTree, [k])}
             </tr>
           ))}
         </tbody>
