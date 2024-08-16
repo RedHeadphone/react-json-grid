@@ -81,6 +81,7 @@ function App() {
       <JSONGrid
         data={data}
         searchText={"ben"}
+        onSelect={(keyPath) => console.log(keyPath)}
         theme={"blueberryDark"}
         customTheme={{ numberColor: "white" }}
         defaultExpandKeyTree={keyTree}
