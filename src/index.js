@@ -8,6 +8,8 @@ const JSONGrid = ({
   data,
   defaultExpandDepth = 0,
   defaultExpandKeyTree = {},
+  onSelect = (keyPath) => {},
+  highlightSelected = true,
   searchText,
   theme = "default",
   customTheme = {},
@@ -37,6 +39,14 @@ const JSONGrid = ({
 
   if (defaultExpandDepth < 0) {
     throw new Error("JSONGrid: defaultExpandDepth prop must not be a negative number");
+  }
+
+  if (onSelect && typeof onSelect !== "function") {
+    throw new Error("JSONGrid: onSelect prop must be a function");
+  }
+
+  if (highlightSelected && typeof highlightSelected !== "boolean") {
+    throw new Error("JSONGrid: highlightSelected prop must be a boolean");
   }
 
   if (searchText && typeof searchText !== "string") {
@@ -77,8 +87,11 @@ const JSONGrid = ({
     <div className={styles["json-grid-container"]} style={themeStyles} ref={wrapperRef}>
       <NestedJSONGrid
         level={0}
+        keyPath={[]}
         data={data}
         highlightedElement={highlightedElement}
+        highlightSelected={highlightSelected}
+        onSelect={onSelect}
         setHighlightedElement={setHighlightedElement}
         defaultExpandDepth={defaultExpandDepth}
         defaultExpandKeyTree={mergedKeyTree}

@@ -81,14 +81,16 @@ class Example extends Component {
 
 The JSONGrid component supports the following props:
 
-| Name                  | Type     | Description                                                           | Default     |
-| --------------------- | -------- | --------------------------------------------------------------------- | ----------- |
-| data                  | object   | The JSON object or array to be transformed into a grid table.         | undefined   |
-| defaultExpandDepth    | number   | The depth to which the grid is expanded by default.                   | 0           |
-| defaultExpandKeyTree  | object   | Tree-like structure with all keys that needs to be expanded.          | undefined   |
-| searchText            | string   | The text that needs to be searched in the JSON data.                  | undefined   |
-| theme                 | string   | The theme name that needs to be applied.                              | 'default'   |
-| customTheme           | object   | The customTheme object which specify color code of each part of grid. | {}          |
+| Name                  | Type     | Description                                                           | Default       |
+| --------------------- | -------- | --------------------------------------------------------------------- | ------------- |
+| data                  | object   | The JSON object or array to be transformed into a grid table.         | undefined     |
+| defaultExpandDepth    | number   | The depth to which the grid is expanded by default.                   | 0             |
+| defaultExpandKeyTree  | object   | Tree-like structure with all keys that needs to be expanded.          | undefined     |
+| onSelect              | function | Event to obtain selected item's keyPath                               | (keyPath)=>{} |
+| highlightSelected     | boolean  | Whether to highlight the selected item or not.                        | true          |
+| searchText            | string   | The text that needs to be searched in the JSON data.                  | undefined     |
+| theme                 | string   | The theme name that needs to be applied.                              | 'default'     |
+| customTheme           | object   | The customTheme object which specify color code of each part of grid. | {}            |
 
 ## Themes
 

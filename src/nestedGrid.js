@@ -5,9 +5,12 @@ import { classnames, matchesText, checkAllObjects } from "./utils";
 const NestedJSONGrid = (props) => {
   const {
     level,
+    keyPath,
     data,
     dataKey,
     highlightedElement,
+    highlightSelected,
+    onSelect,
     setHighlightedElement,
     defaultExpandDepth,
     defaultExpandKeyTree,
@@ -23,9 +26,16 @@ const NestedJSONGrid = (props) => {
       return;
     if (highlightedElement != null)
       highlightedElement.classList.remove(styles.highlight);
+    let nextKeyPath = [];
     let nextHighlightElement = e.currentTarget;
-    if (e.currentTarget.hasAttribute("rowhighlight"))
+    if (e.currentTarget.hasAttribute("rowhighlight")){
       nextHighlightElement = e.currentTarget.parentElement;
+      const rowIndex = Array.prototype.indexOf.call(
+        nextHighlightElement.parentElement.children,
+        nextHighlightElement
+      )
+      nextKeyPath = [rowIndex];
+    }
     else if (e.currentTarget.hasAttribute("colhighlight")) {
       const colIndex = Array.prototype.indexOf.call(
         e.currentTarget.parentElement.children,
@@ -34,12 +44,36 @@ const NestedJSONGrid = (props) => {
       nextHighlightElement =
         e.currentTarget.parentElement.parentElement.previousElementSibling
           .children[colIndex];
+      nextKeyPath = [[keys[colIndex-1]]];
     }
-    nextHighlightElement.classList.add(styles.highlight);
+    else {
+      const rowIndex = Array.prototype.indexOf.call(
+        nextHighlightElement.parentElement.parentElement.children,
+        nextHighlightElement.parentElement
+      )
+      const colIndex = Array.prototype.indexOf.call(
+        nextHighlightElement.parentElement.children,
+        nextHighlightElement
+      )
+      if (allObjects){
+        nextKeyPath = [rowIndex, keys[colIndex-1]];
+      }
+      else {
+        const key = Object.keys(data)[rowIndex];
+        if (colIndex === 0) {
+          nextKeyPath = [[key]];
+        } else {
+          nextKeyPath = [key];
+        }
+      }
+    }
+    if (highlightSelected) 
+      nextHighlightElement.classList.add(styles.highlight);
     setHighlightedElement(nextHighlightElement);
+    onSelect(keyPath.concat(nextKeyPath));
   };
 
-  const renderValue = (key, value, level, keyTree) => {
+  const renderValue = (key, value, level, keyTree, nextKeyPath) => {
     if (value && typeof value === "object")
       return (
         <td
@@ -50,9 +84,12 @@ const NestedJSONGrid = (props) => {
         >
           <NestedJSONGrid
             level={level + 1}
+            keyPath={keyPath.concat(nextKeyPath)}
             dataKey={key}
             data={value}
             highlightedElement={highlightedElement}
+            highlightSelected={highlightSelected}
+            onSelect={onSelect}
             setHighlightedElement={setHighlightedElement}
             defaultExpandDepth={defaultExpandDepth}
             defaultExpandKeyTree={keyTree && keyTree[key]}
@@ -79,9 +116,7 @@ const NestedJSONGrid = (props) => {
     );
   };
 
-  const renderTable = (data, level) => {
-    const { allObjects, keys } = checkAllObjects(data);
-
+  const renderTable = (data, level, allObjects, keys) => {
     return (
       <table className={styles["json-grid-table"]}>
         {allObjects && (
@@ -173,16 +208,19 @@ const NestedJSONGrid = (props) => {
                       kk,
                       v,
                       level,
-                      defaultExpandKeyTree && defaultExpandKeyTree[k]
+                      defaultExpandKeyTree && defaultExpandKeyTree[k],
+                      [parseInt(k),kk]
                     )
                   )
-                : renderValue(k, data[k], level, defaultExpandKeyTree)}
+                : renderValue(k, data[k], level, defaultExpandKeyTree, [k])}
             </tr>
           ))}
         </tbody>
       </table>
     );
   };
+
+  const { allObjects, keys } = checkAllObjects(data);
 
   if (level !== 0) {
     const [open, setOpen] = useState(
@@ -201,12 +239,12 @@ const NestedJSONGrid = (props) => {
         <span className={styles.title}>
           {dataKey}&nbsp;{Array.isArray(data) ? `[${data.length}]` : "{}"}
         </span>
-        {open && renderTable(data, level)}
+        {open && renderTable(data, level, allObjects, keys)}
       </div>
     );
   }
 
-  return renderTable(data, level);
+  return renderTable(data, level, allObjects, keys);
 };
 
 export default NestedJSONGrid;
