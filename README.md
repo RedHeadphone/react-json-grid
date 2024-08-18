@@ -16,11 +16,11 @@ The library react-json-grid provides the React component JSONGrid, which is a us
 
 ## Features
 
-- **Ease of Integration**: Seamlessly incorporate the component into your React applications without any hassle and no dependencies.
-- **Nested JSON Support**: Handle deeply nested JSON structures with ease, creating nested structured grid tables that are collapsible and expandible.
-- **Highlight Magic**: Select and highlight specific cells, rows, or columns in the grid tables to enhance the user interface and facilitate interaction.
-- **Search Spotlight**: Enhance the visibility of your JSON data with a search feature that effectively highlights cells matching with the search text.
-- **Customizable Styling**: Tailor the appearance of the grid to match your application's design using custom theme.
+- 🛠️ **Ease of Integration**: Seamlessly incorporate the component into your React applications without any hassle and no dependencies.
+- 🗂️ **Nested JSON Support**: Handle deeply nested JSON structures with ease, creating nested structured grid tables that are collapsible and expandible.
+- ✨ **Highlight Magic**: Select and highlight specific cells, rows, or columns in the grid tables to enhance the user interface and facilitate interaction.
+- 🔍 **Search Spotlight**: Enhance the visibility of your JSON data with a search feature that effectively highlights cells matching with the search text.
+- 🎨 **Customizable Styling**: Tailor the appearance of the grid to match your application's design using custom theme.
 
 ## Install
 
@@ -97,54 +97,29 @@ The JSONGrid component supports the following props:
 ### Available Themes
 
 - default
-- radical
-- cobalt
 - dracula
 - monokai
-- solarizedLight
-- solarizedDark
-- materialDark
-- oceanicNext
+- oceanicPark
 - panda
 - gruvboxMaterial
-- merko
 - tokyoNight
 - remedy
-- minimal
-- auroraX
 - atlanticNight
-- aTouchOfLilac
-- glassUI
-- fireflyPro
-- reUI
+- defaultLight
+- defaultLight2
 - slime
-- signedDarkPro
-- ariakeDark
-- snazzyLight
 - spacegray
-- celestial
 - blueberryDark
-- bear
-- oneDarkPro
 - nord
-- palenight
 - nightOwl
-- andromeda
-- horizon
-- cobalt2
-- atomOneLight
-- ysgrifennwr
-- notepadPlusPlusRemixed
-- githubLight
+- oneMonokai
+- cobaltNext
 - shadesOfPurple
-- synthWave
 - codeBlue
-- cyberpunk
-- laserWave
-- hipster
-- wildberry
-- qiita
 - softEra
+- atomMaterial
+- evaDark
+- moonLight
 
 Note: Pass one of above themes as a string in the theme prop. You can contribute your custom theme in [themes.js](src/themes.js)
 
@@ -169,10 +144,6 @@ Note: Pass one of above themes as a string in the theme prop. You can contribute
 ```
 
 Note: All field values need to be strings that are accepted by CSS for color. All fields are not mandatory.
-
-## Contributing
-
-Please kindly follow [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
 
 ## Acknowledgements
 
