@@ -34,46 +34,53 @@ npm install @redheadphone/react-json-grid
 yarn add @redheadphone/react-json-grid
 ```
 
+### CDN
+
+You can also include the library directly via CDN:
+
+```html
+<script src="https://unpkg.com/@redheadphone/react-json-grid@{version}/dist/index.umd.js"></script>
+```
+
+Replace {version} with the desired version number, like 0.6.0. Then, use the component as follows:
+
+```jsx
+const JSONGrid = window['react-json-grid'];
+```
+
 ## Usage
 
 Here's an example of how to use the react-json-grid library:
 
 ```jsx
-import React, { Component } from 'react'
 import JSONGrid from '@redheadphone/react-json-grid'
 
-class Example extends Component {
-  render () {
-    const data = {
-      "id": "0001",
-      "type": "donut",
-      "name": "Cake",
-      "ppu": 0.55,
-      "batters":
-        {
-          "batter":
-            [
-              { "id": "1001", "type": "Regular" },
-              { "id": "1002", "type": "Chocolate" },
-              { "id": "1003", "type": "Blueberry" },
-              { "id": "1004", "type": "Devil's Food" }
-            ]
-        },
-      "topping":
-        [
-          { "id": "5001", "type": "None" },
-          { "id": "5002", "type": "Glazed" },
-          { "id": "5005", "type": "Sugar" },
-          { "id": "5007", "type": "Powdered Sugar" },
-          { "id": "5006", "type": "Chocolate with Sprinkles" },
-          { "id": "5003", "type": "Chocolate" },
-          { "id": "5004", "type": "Maple" }
-        ]
-    }
-    return (
-      <JSONGrid data={data}/>
-    )
+function ExampleComponent() {
+  const data = {
+    "id": "0001",
+    "type": "donut",
+    "name": "Cake",
+    "ppu": 0.55,
+    "batters": {
+      "batter": [
+        { "id": "1001", "type": "Regular" },
+        { "id": "1002", "type": "Chocolate" },
+        { "id": "1003", "type": "Blueberry" },
+        { "id": "1004", "type": "Devil's Food" }
+      ]
+    },
+    "topping": [
+      { "id": "5001", "type": "None" },
+      { "id": "5002", "type": "Glazed" },
+      { "id": "5005", "type": "Sugar" },
+      { "id": "5007", "type": "Powdered Sugar" },
+      { "id": "5006", "type": "Chocolate with Sprinkles" },
+      { "id": "5003", "type": "Chocolate" },
+      { "id": "5004", "type": "Maple" }
+    ]
   }
+
+  return <JSONGrid data={data} />
 }
 ```
 
@@ -121,7 +128,7 @@ The JSONGrid component supports the following props:
 - evaDark
 - moonLight
 
-Note: Pass one of above themes as a string in the theme prop. You can contribute your custom theme in [themes.js](src/themes.js)
+Note: Pass one of above themes as a string in the theme prop. You can contribute your custom theme in [themes.js](src/themes.js) if you want.
 
 ### Custom Theme Object Format
 
@@ -143,7 +150,7 @@ Note: Pass one of above themes as a string in the theme prop. You can contribute
 }
 ```
 
-Note: All field values need to be strings that are accepted by CSS for color. All fields are not mandatory.
+Note: These fields override original theme fields, so all fields are not mandatory. All field values need to be strings that are accepted by CSS for color.
 
 ## Acknowledgements
 
