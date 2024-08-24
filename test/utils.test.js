@@ -1,4 +1,4 @@
-import { lookup, mergeKeyTrees, checkAllObjects } from "../utils";
+import { lookup, mergeKeyTrees, checkAllObjects } from "../src/utils";
 
 describe("lookup function", () => {
   test("should return null when obj is null", () => {

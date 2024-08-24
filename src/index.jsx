@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./styles.css";
 import themes from "./themes";
 import { lookup, mergeKeyTrees } from "./utils";
-import NestedJSONGrid from "./nestedGrid";
+import NestedJSONGrid from "./nestedGrid.jsx";
 
 const JSONGrid = ({
   data,

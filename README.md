@@ -1,7 +1,7 @@
 # React JSON Grid
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/RedHeadphone/react-json-grid/master/assets/images/github-banner.png">
+  <img src="assets/github-banner.png">
 </p>
 
 <p align="center">
