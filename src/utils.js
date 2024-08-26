@@ -60,9 +60,9 @@ export function mergeKeyTrees(keyTree1, keyTree2) {
 
 export function checkAllObjects(data) {
   let allObjects = false;
-  let keys;
+  let keys = [];
   if (Array.isArray(data)) {
-    allObjects = true;
+    allObjects = (data.length > 0);
     keys = new Set();
     for (let i = 0; i < data.length; i++) {
       if (typeof data[i] !== "object" || Array.isArray(data[i])) {

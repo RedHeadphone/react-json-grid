@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./styles.css";
 import themes from "./themes";
 import { lookup, mergeKeyTrees } from "./utils";
-import NestedJSONGrid from "./nestedGrid";
+import NestedJSONGrid from "./nestedGrid.jsx";
 
 const JSONGrid = ({
   data,
@@ -25,8 +25,8 @@ const JSONGrid = ({
         setHighlightedElement(null);
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, [highlightedElement]);
 
   if (!data) {

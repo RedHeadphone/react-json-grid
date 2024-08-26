@@ -82,8 +82,8 @@ function App() {
         data={data}
         searchText={"ben"}
         onSelect={(keyPath) => console.log(keyPath)}
-        theme={"blueberryDark"}
-        customTheme={{ numberColor: "white" }}
+        theme={"moonLight"}
+        customTheme={{ tableHeaderColor: "white" }}
         defaultExpandKeyTree={keyTree}
       />
     </div>
