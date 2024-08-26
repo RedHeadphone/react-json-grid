@@ -1,7 +1,7 @@
 # React JSON Grid
 
 <p align="center">
-  <img src="assets/github-banner.png">
+  <img src="images/github-banner.png">
 </p>
 
 <p align="center">
