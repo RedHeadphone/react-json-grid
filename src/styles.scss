@@ -1,0 +1,118 @@
+.json-grid-container {
+  --jg-bg-color: #222;
+  --jg-border-color: #b5b5b5;
+  --jg-cell-border-color: #474747;
+
+  --jg-key-color: #ffffff;
+  --jg-index-color: #949494;
+
+  --jg-number-color: #6c99bb;
+  --jg-boolean-color: #6c99bb;
+  --jg-string-color: #a5c261;
+  --jg-object-color: #ffffff;
+
+  --jg-table-header-bg-color: #444;
+  --jg-table-icon-color: #ffffff;
+
+  --jg-select-highlight-bg-color: #3b3b3b;
+  --jg-search-highlight-bg-color: #565a36;
+
+  display: inline-block;
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.5;
+  text-align: left;
+  background-color: var(--jg-bg-color);
+
+  &,
+  .json-grid-table {
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .json-grid-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: solid var(--jg-table-border-color) 1px;
+
+    .json-grid-table {
+      margin: 3px 0px;
+    }
+
+    .glyphicon {
+      position: relative;
+      top: 3px;
+      display: inline-block;
+      color: var(--jg-table-icon-color);
+    }
+  }
+
+  .highlight {
+    background-color: var(--jg-select-highlight-bg-color);
+    font-weight: bold;
+  }
+
+  .obj {
+    border: 1px solid var(--jg-cell-border-color);
+    padding: 3px 10px;
+    padding-bottom: 4px;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &,
+    .name {
+      color: var(--jg-key-color);
+    }
+
+    .index {
+      color: var(--jg-index-color);
+    }
+
+    .number {
+      color: var(--jg-number-color);
+    }
+
+    .boolean {
+      color: var(--jg-boolean-color);
+    }
+
+    .string {
+      color: var(--jg-string-color);
+    }
+
+    .undefined {
+      color: var(--jg-object-color);
+    }
+
+    .object {
+      color: var(--jg-object-color);
+    }
+  }
+
+  .order {
+    background-color: var(--jg-table-header-bg-color);
+    font-weight: normal !important;
+  }
+
+  .key {
+    vertical-align: top;
+  }
+
+  .title {
+    font-weight: bold;
+  }
+
+  .plusminus {
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 2px;
+  }
+
+  .search-highlight {
+    background-color: var(--jg-search-highlight-bg-color);
+    padding: 1px 5px;
+    padding-top: 0;
+    border-radius: 2px;
+  }
+}

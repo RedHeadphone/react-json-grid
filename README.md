@@ -135,18 +135,18 @@ Note: Pass one of above themes as a string in the theme prop. You can contribute
 ```json
 {
   "bgColor": "#222",
-  "tableBorderColor": "#b5b5b5",
-  "highlightBgColor": "#3b3b3b",
+  "borderColor": "#b5b5b5",
+  "selectHighlightBgColor": "#3b3b3b",
   "cellBorderColor": "#474747",
-  "keyNameColor": "#ffffff",
+  "keyColor": "#ffffff",
   "indexColor": "#949494",
   "numberColor": "#6c99bb",
   "booleanColor": "#6c99bb",
   "stringColor": "#a5c261",
   "objectColor": "#ffffff",
   "tableHeaderBgColor": "#444",
-  "tableHeaderColor": "#ffffff",
-  "searchHighlightColor": "#565a36"
+  "tableIconColor": "#ffffff",
+  "searchHighlightBgColor": "#565a36"
 }
 ```
 

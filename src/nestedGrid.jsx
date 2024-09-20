@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from "react";
-import styles from "./styles.css";
+import styles from "./styles.scss";
 import { classnames, matchesText, checkAllObjects } from "./utils";
 
 const NestedJSONGrid = (props) => {
@@ -20,45 +20,29 @@ const NestedJSONGrid = (props) => {
   const highlight = (e) => {
     if (
       (e.target !== e.currentTarget && e.target.hasAttribute("clickable")) ||
-      (e.target.parentElement !== e.currentTarget &&
-        e.target.parentElement.hasAttribute("clickable"))
+      (e.target.parentElement !== e.currentTarget && e.target.parentElement.hasAttribute("clickable"))
     )
       return;
-    if (highlightedElement != null)
-      highlightedElement.classList.remove(styles.highlight);
+    if (highlightedElement != null) highlightedElement.classList.remove(styles.highlight);
     let nextKeyPath = [];
     let nextHighlightElement = e.currentTarget;
-    if (e.currentTarget.hasAttribute("rowhighlight")){
+    if (e.currentTarget.hasAttribute("rowhighlight")) {
       nextHighlightElement = e.currentTarget.parentElement;
-      const rowIndex = Array.prototype.indexOf.call(
-        nextHighlightElement.parentElement.children,
-        nextHighlightElement
-      )
+      const rowIndex = Array.prototype.indexOf.call(nextHighlightElement.parentElement.children, nextHighlightElement);
       nextKeyPath = [rowIndex];
-    }
-    else if (e.currentTarget.hasAttribute("colhighlight")) {
-      const colIndex = Array.prototype.indexOf.call(
-        e.currentTarget.parentElement.children,
-        e.currentTarget
-      );
-      nextHighlightElement =
-        e.currentTarget.parentElement.parentElement.previousElementSibling
-          .children[colIndex];
-      nextKeyPath = [[keys[colIndex-1]]];
-    }
-    else {
+    } else if (e.currentTarget.hasAttribute("colhighlight")) {
+      const colIndex = Array.prototype.indexOf.call(e.currentTarget.parentElement.children, e.currentTarget);
+      nextHighlightElement = e.currentTarget.parentElement.parentElement.previousElementSibling.children[colIndex];
+      nextKeyPath = [[keys[colIndex - 1]]];
+    } else {
       const rowIndex = Array.prototype.indexOf.call(
         nextHighlightElement.parentElement.parentElement.children,
         nextHighlightElement.parentElement
-      )
-      const colIndex = Array.prototype.indexOf.call(
-        nextHighlightElement.parentElement.children,
-        nextHighlightElement
-      )
-      if (allObjects){
-        nextKeyPath = [rowIndex, keys[colIndex-1]];
-      }
-      else {
+      );
+      const colIndex = Array.prototype.indexOf.call(nextHighlightElement.parentElement.children, nextHighlightElement);
+      if (allObjects) {
+        nextKeyPath = [rowIndex, keys[colIndex - 1]];
+      } else {
         const key = Object.keys(data)[rowIndex];
         if (colIndex === 0) {
           nextKeyPath = [[key]];
@@ -67,8 +51,7 @@ const NestedJSONGrid = (props) => {
         }
       }
     }
-    if (highlightSelected) 
-      nextHighlightElement.classList.add(styles.highlight);
+    if (highlightSelected) nextHighlightElement.classList.add(styles.highlight);
     setHighlightedElement(nextHighlightElement);
     onSelect(keyPath.concat(nextKeyPath));
   };
@@ -76,12 +59,7 @@ const NestedJSONGrid = (props) => {
   const renderValue = (key, value, level, keyTree, nextKeyPath) => {
     if (value && typeof value === "object")
       return (
-        <td
-          className={classnames(styles.obj, styles.value)}
-          onClick={highlight}
-          clickable="true"
-          key={key}
-        >
+        <td className={classnames(styles.obj, styles.value)} onClick={highlight} clickable="true" key={key}>
           <NestedJSONGrid
             level={level + 1}
             keyPath={keyPath.concat(nextKeyPath)}
@@ -98,17 +76,9 @@ const NestedJSONGrid = (props) => {
         </td>
       );
     return (
-      <td
-        className={classnames(styles.obj, styles.value)}
-        onClick={highlight}
-        clickable="true"
-        key={key}
-      >
+      <td className={classnames(styles.obj, styles.value)} onClick={highlight} clickable="true" key={key}>
         <span
-          className={classnames(
-            styles[typeof value],
-            matchesText(value, searchText) && styles["search-highlight"]
-          )}
+          className={classnames(styles[typeof value], matchesText(value, searchText) && styles["search-highlight"])}
         >
           {String(value)}
         </span>
@@ -129,10 +99,7 @@ const NestedJSONGrid = (props) => {
             </colgroup>
             <thead>
               <tr>
-                <th
-                  className={classnames(styles.obj, styles.order)}
-                  clickable="true"
-                >
+                <th className={classnames(styles.obj, styles.order)} clickable="true">
                   <svg
                     className={styles.glyphicon}
                     clickable="true"
@@ -148,23 +115,13 @@ const NestedJSONGrid = (props) => {
                 </th>
                 {keys.map((k) => (
                   <th
-                    className={classnames(
-                      styles.obj,
-                      styles.order,
-                      styles.name
-                    )}
+                    className={classnames(styles.obj, styles.order, styles.name)}
                     key={k}
                     onClick={highlight}
                     clickable="true"
                     colhighlight="true"
                   >
-                    <span
-                      className={
-                        matchesText(k, searchText)
-                          ? styles["search-highlight"]
-                          : undefined
-                      }
-                    >
+                    <span className={matchesText(k, searchText) ? styles["search-highlight"] : undefined}>
                       {k.replace(/_/g, " ")}
                     </span>
                   </th>
@@ -186,31 +143,15 @@ const NestedJSONGrid = (props) => {
                   {parseInt(k) + 1}
                 </td>
               ) : (
-                <td
-                  className={classnames(styles.obj, styles.key, styles.name)}
-                  onClick={highlight}
-                  clickable="true"
-                >
-                  <span
-                    className={
-                      matchesText(k, searchText)
-                        ? styles["search-highlight"]
-                        : undefined
-                    }
-                  >
+                <td className={classnames(styles.obj, styles.key, styles.name)} onClick={highlight} clickable="true">
+                  <span className={matchesText(k, searchText) ? styles["search-highlight"] : undefined}>
                     {k.replace(/_/g, " ")}
                   </span>
                 </td>
               )}
               {allObjects
                 ? Object.entries(data[k]).map(([kk, v]) =>
-                    renderValue(
-                      kk,
-                      v,
-                      level,
-                      defaultExpandKeyTree && defaultExpandKeyTree[k],
-                      [parseInt(k),kk]
-                    )
+                    renderValue(kk, v, level, defaultExpandKeyTree && defaultExpandKeyTree[k], [parseInt(k), kk])
                   )
                 : renderValue(k, data[k], level, defaultExpandKeyTree, [k])}
             </tr>
@@ -223,17 +164,11 @@ const NestedJSONGrid = (props) => {
   const { allObjects, keys } = checkAllObjects(data);
 
   if (level !== 0) {
-    const [open, setOpen] = useState(
-      level <= defaultExpandDepth || defaultExpandKeyTree
-    );
+    const [open, setOpen] = useState(level <= defaultExpandDepth || defaultExpandKeyTree);
 
     return (
       <div className={styles.box}>
-        <span
-          className={styles.plusminus}
-          onClick={() => setOpen(!open)}
-          clickable="true"
-        >
+        <span className={styles.plusminus} onClick={() => setOpen(!open)} clickable="true">
           {open ? "[-]" : "[+]"}
         </span>
         <span className={styles.title}>

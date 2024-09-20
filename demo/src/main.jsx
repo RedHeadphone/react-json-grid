@@ -11,65 +11,43 @@ function App() {
     active: true,
     won: [2016, 2017, 2019],
     leader: {
-      isActive: false,
-      age: 23,
-      eyeColor: "blue",
       name: "Lela Ramos",
-      gender: "female",
-      registered: "2014-02-24T03:13:50 +05:00",
+      leaderSince: 2017,
+      motto: null,
     },
     members: [
       {
-        index: 0,
+        isActive: false,
         age: 21,
         eyeColor: "blue",
         name: "Bentley Clayton",
         gender: "male",
-        registered: "2018-05-02T05:35:41 +04:00",
+        power: undefined,
       },
       {
-        index: 1,
-        isActive: false,
+        isActive: true,
         age: 23,
         eyeColor: "blue",
         name: "Lela Ramos",
         gender: "female",
-        registered: "2014-02-24T03:13:50 +05:00",
+        power: "super strength",
+        superheroAlias: "Sky Queen",
       },
       {
-        index: 2,
         isActive: true,
         age: 38,
         eyeColor: "green",
         name: "Milagros Becker",
         gender: "female",
-        registered: "2016-10-22T12:18:50 +04:00",
+        power: "invisibility",
       },
       {
-        index: 3,
-        isActive: false,
-        age: 30,
-        eyeColor: "brown",
-        name: "Mccoy Barrera",
-        gender: "male",
-        registered: "2016-12-03T03:44:57 +05:00",
-      },
-      {
-        index: 4,
-        isActive: false,
-        age: 35,
-        eyeColor: "brown",
-        name: "Morton Bennett",
-        gender: "male",
-        registered: "2015-10-06T09:48:03 +04:00",
-      },
-      {
-        index: 5,
         isActive: true,
         age: 20,
         name: "Acosta Bird",
         gender: "male",
-        registered: "2019-02-11T09:59:58 +05:00",
+        power: undefined,
+        superheroAlias: "Falcon Knight",
       },
     ],
   };
@@ -80,10 +58,10 @@ function App() {
     <div className="demo-container">
       <JSONGrid
         data={data}
-        searchText={"ben"}
+        searchText={"bird"}
         onSelect={(keyPath) => console.log(keyPath)}
         theme={"moonLight"}
-        customTheme={{ tableHeaderColor: "white" }}
+        customTheme={{ tableIconColor: "#e4e4e4" }}
         defaultExpandKeyTree={keyTree}
       />
     </div>
