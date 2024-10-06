@@ -4,7 +4,10 @@
   "description": "React Component that converts JSON to nested grid tables.",
   "author": "Huzaifa Khilawala",
   "license": "MIT",
-  "repository": "https://github.com/RedHeadphone/react-json-grid",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RedHeadphone/react-json-grid.git"
+  },
   "keywords": [
     "react",
     "json",
