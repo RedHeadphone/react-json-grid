@@ -134,7 +134,7 @@ describe("checkAllObjects function", () => {
   });
 
   test("should return true for allObjects and an empty array for keys when data is an empty array", () => {
-    const data = [];
+    const data: any[] = [];
     expect(checkAllObjects(data)).toEqual({ allObjects: false, keys: [] });
   });
 

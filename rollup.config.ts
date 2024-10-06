@@ -1,13 +1,14 @@
 import babel from "@rollup/plugin-babel";
+import typescript from '@rollup/plugin-typescript';
 import commonjs from "@rollup/plugin-commonjs";
-import postcss from "rollup-plugin-postcss";
 import resolve from "@rollup/plugin-node-resolve";
+import postcss from "rollup-plugin-postcss";
 import url from "@rollup/plugin-url";
 
 import pkg from "./package.json";
 
 export default {
-  input: "src/index.jsx",
+  input: "src/index.tsx",
   external: ["react"],
   output: [
     {
@@ -37,6 +38,7 @@ export default {
     },
   ],
   plugins: [
+    typescript(),
     postcss({
       modules: true,
     }),
