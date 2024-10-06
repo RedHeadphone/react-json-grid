@@ -1,7 +1,7 @@
 # React JSON Grid
 
 <p align="center">
-  <img src="images/github-banner.png">
+  <img src="https://raw.githubusercontent.com/RedHeadphone/react-json-grid/refs/heads/master/images/github-banner.png">
 </p>
 
 <p align="center">
@@ -128,7 +128,7 @@ The JSONGrid component supports the following props:
 - evaDark
 - moonLight
 
-Note: Pass one of above themes as a string in the theme prop. You can contribute your custom theme in [themes.js](src/themes.js) if you want.
+Note: Pass one of above themes as a string in the theme prop. You can contribute your custom theme in [themes.js](https://github.com/RedHeadphone/react-json-grid/blob/master/src/themes.ts) if you want.
 
 ### Custom Theme Object Format
 
