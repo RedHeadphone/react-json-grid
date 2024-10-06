@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "demo": "cd demo && npm run start",
-    "test": "jest --silent",
+    "test": "jest --silent --config jest.config.ts",
     "build": "rollup -c --bundleConfigAsCjs",
     "dev": "rollup -c -w --bundleConfigAsCjs",
     "prepublishOnly": "npm run build"
@@ -44,12 +44,17 @@
     "@babel/plugin-external-helpers": "^7.24.7",
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.25.7",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-node-resolve": "^15.3.0",
+    "@rollup/plugin-typescript": "^12.1.0",
     "@rollup/plugin-url": "^8.0.2",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^12.1.5",
+    "@types/jest": "^29.5.13",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^29.7.0",
     "eslint": "^8.57.1",
@@ -67,6 +72,10 @@
     "react-dom": "^16.14.0",
     "rollup": "^4.22.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "sass": "^1.79.3"
+    "rollup-plugin-scss": "^4.0.0",
+    "sass": "^1.79.3",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.7.0",
+    "typescript": "^5.6.2"
   }
 }

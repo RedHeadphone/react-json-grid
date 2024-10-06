@@ -20,8 +20,8 @@ describe("JSONGrid data render", () => {
 
     expect(getByText("fruit")).toBeInTheDocument()
     
-    expect(getByText("size").parentElement.parentElement).toContainElement(getByText("Large"))
-    expect(getByText("size").parentElement.parentElement).not.toContainElement(getByText("Apple"))
+    expect(getByText("size").parentElement?.parentElement).toContainElement(getByText("Large"))
+    expect(getByText("size").parentElement?.parentElement).not.toContainElement(getByText("Apple"))
 
     expect(getByText("Red")).toHaveClass("search-highlight")
 
@@ -52,7 +52,7 @@ describe("JSONGrid click highlight", () => {
 
     expect(getByText("Apple").parentElement).toHaveClass("highlight");
 
-    fireEvent.click(getByText("Large").parentElement);
+    fireEvent.click(getByText("Large").parentElement!);
 
     expect(getByText("Large").parentElement).toHaveClass("highlight");
     expect(getByText("Apple").parentElement).not.toHaveClass("highlight");
@@ -77,7 +77,7 @@ describe("JSONGrid click highlight", () => {
 
     fireEvent.click(getByText("1"));
 
-    expect(getByText("Apple").parentElement.parentElement).toHaveClass("highlight");
+    expect(getByText("Apple").parentElement?.parentElement).toHaveClass("highlight");
 
     fireEvent.click(getByText("fruit"));
 

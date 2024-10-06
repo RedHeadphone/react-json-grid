@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import JSONGrid from "@redheadphone/react-json-grid";
 
-function App() {
+const App: React.FC = () => {
   const data = {
     squadName: "Super hero squad",
     homeTown: "Metro City",
@@ -59,7 +59,7 @@ function App() {
       <JSONGrid
         data={data}
         searchText={"bird"}
-        onSelect={(keyPath) => console.log(keyPath)}
+        onSelect={(keyPath: any) => console.log(keyPath)}
         theme={"moonLight"}
         customTheme={{ tableIconColor: "#e4e4e4" }}
         defaultExpandKeyTree={keyTree}
@@ -68,4 +68,4 @@ function App() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+ReactDOM.createRoot(document.getElementById("root")!).render(<App />);

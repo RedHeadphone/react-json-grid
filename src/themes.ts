@@ -1,4 +1,4 @@
-const themes = {
+const themes: Themes = {
   default: {
     bgColor: "#222",
     borderColor: "#b5b5b5",

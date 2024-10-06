@@ -1,25 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./styles.scss";
-import themes from "./themes";
 import { lookup, mergeKeyTrees, validateProps, getThemeStyles } from "./utils";
-import NestedJSONGrid from "./nestedGrid.jsx";
+import NestedJSONGrid from "./nestedGrid";
 
-const JSONGrid = ({
+const JSONGrid: React.FC<any> = ({
   data,
   defaultExpandDepth = 0,
   defaultExpandKeyTree = {},
-  onSelect = (keyPath) => {},
+  onSelect = (keyPath: any) => {},
   highlightSelected = true,
   searchText,
   theme = "default",
   customTheme = {},
 }) => {
-  const [highlightedElement, setHighlightedElement] = useState(null);
-  const wrapperRef = useRef(null);
+  const [highlightedElement, setHighlightedElement] = useState<HTMLElement | null>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as HTMLElement)) {
         if (highlightedElement !== null) highlightedElement.classList.remove(styles.highlight);
         setHighlightedElement(null);
       }
@@ -32,15 +31,15 @@ const JSONGrid = ({
     validateProps({
       data,
       defaultExpandDepth,
+      defaultExpandKeyTree,
       onSelect,
       highlightSelected,
       searchText,
-      theme,
-      themes,
+      theme
     });
-  }, [data, defaultExpandDepth, onSelect, highlightSelected, searchText, theme, themes]);
+  }, [data, defaultExpandDepth, onSelect, highlightSelected, searchText, theme]);
 
-  const themeStyles = getThemeStyles(customTheme, theme, themes);
+  const themeStyles = getThemeStyles(customTheme, theme);
 
   const mergedKeyTree = searchText
     ? mergeKeyTrees(defaultExpandKeyTree, lookup(data, searchText))
