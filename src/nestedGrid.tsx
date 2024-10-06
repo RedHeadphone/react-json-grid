@@ -32,18 +32,26 @@ const NestedJSONGrid = (props: NestedGridProps) => {
     if (highlightedElement != null) highlightedElement.classList.remove(styles.highlight);
     if (currentTarget.hasAttribute("data-rowhighlight")) {
       nextHighlightElement = currentTarget.parentElement;
-      const rowIndex = Array.prototype.indexOf.call(nextHighlightElement?.parentElement?.children, nextHighlightElement);
+      const rowIndex = Array.prototype.indexOf.call(
+        nextHighlightElement?.parentElement?.children,
+        nextHighlightElement
+      );
       nextKeyPath = [rowIndex];
     } else if (currentTarget.hasAttribute("data-colhighlight")) {
       const colIndex = Array.prototype.indexOf.call(currentTarget.parentElement?.children, currentTarget);
-      nextHighlightElement = currentTarget.parentElement?.parentElement?.previousElementSibling?.children[colIndex] as HTMLElement | null;
+      nextHighlightElement = currentTarget.parentElement?.parentElement?.previousElementSibling?.children[
+        colIndex
+      ] as HTMLElement | null;
       nextKeyPath = [[keys[colIndex - 1]]];
     } else {
       const rowIndex = Array.prototype.indexOf.call(
         nextHighlightElement?.parentElement?.parentElement?.children,
         nextHighlightElement.parentElement
       );
-      const colIndex = Array.prototype.indexOf.call(nextHighlightElement?.parentElement?.children, nextHighlightElement);
+      const colIndex = Array.prototype.indexOf.call(
+        nextHighlightElement?.parentElement?.children,
+        nextHighlightElement
+      );
       if (allObjects) {
         nextKeyPath = [rowIndex, keys[colIndex - 1]];
       } else {
@@ -97,8 +105,8 @@ const NestedJSONGrid = (props: NestedGridProps) => {
           <Fragment>
             <colgroup>
               <col></col>
-              {keys.map((k: string) => (
-                <col key={k}></col>
+              {keys.map((key: string) => (
+                <col key={key}></col>
               ))}
             </colgroup>
             <thead>
@@ -117,17 +125,15 @@ const NestedJSONGrid = (props: NestedGridProps) => {
                     />
                   </svg>
                 </th>
-                {keys.map((k: string) => (
+                {keys.map((key: string) => (
                   <th
                     className={classnames(styles.obj, styles.order, styles.name)}
-                    key={k}
+                    key={key}
                     onClick={highlight}
                     data-clickable="true"
                     data-colhighlight="true"
                   >
-                    <span className={matchesText(k, searchText) ? styles["search-highlight"] : undefined}>
-                      {k.replace(/_/g, " ")}
-                    </span>
+                    <span className={matchesText(key, searchText) ? styles["search-highlight"] : undefined}>{key}</span>
                   </th>
                 ))}
               </tr>
@@ -135,8 +141,8 @@ const NestedJSONGrid = (props: NestedGridProps) => {
           </Fragment>
         )}
         <tbody>
-          {Object.keys(data).map((k) => (
-            <tr key={k}>
+          {Object.keys(data).map((key) => (
+            <tr key={key}>
               {Array.isArray(data) ? (
                 <td
                   className={classnames(styles.obj, styles.order, styles.index)}
@@ -144,20 +150,28 @@ const NestedJSONGrid = (props: NestedGridProps) => {
                   data-clickable="true"
                   data-rowhighlight="true"
                 >
-                  {parseInt(k) + 1}
+                  {parseInt(key) + 1}
                 </td>
               ) : (
-                <td className={classnames(styles.obj, styles.key, styles.name)} onClick={highlight} data-clickable="true">
-                  <span className={matchesText(k, searchText) ? styles["search-highlight"] : undefined}>
-                    {k.replace(/_/g, " ")}
-                  </span>
+                <td
+                  className={classnames(styles.obj, styles.key, styles.name)}
+                  onClick={highlight}
+                  data-clickable="true"
+                >
+                  <span className={matchesText(key, searchText) ? styles["search-highlight"] : undefined}>{key}</span>
                 </td>
               )}
               {allObjects
-                ? Object.entries(data[k]).map(([kk, v]) =>
-                    renderValue(kk, v, level, defaultExpandKeyTree && defaultExpandKeyTree[k], [parseInt(k), kk])
+                ? keys.map((nestedKey: string) =>
+                    renderValue(
+                      nestedKey,
+                      data[key][nestedKey],
+                      level,
+                      defaultExpandKeyTree && defaultExpandKeyTree[key],
+                      [parseInt(key), nestedKey]
+                    )
                   )
-                : renderValue(k, data[k], level, defaultExpandKeyTree, [k])}
+                : renderValue(key, data[key], level, defaultExpandKeyTree, [key])}
             </tr>
           ))}
         </tbody>

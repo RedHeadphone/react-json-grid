@@ -1,7 +1,7 @@
 import themes from "./themes";
 
 function isObject(obj: any) {
-  return typeof obj === 'object' && !Array.isArray(obj) && obj !== null
+  return typeof obj === "object" && !Array.isArray(obj) && obj !== null;
 }
 
 export function classnames(...args: string[]) {
@@ -12,22 +12,20 @@ export function lookup(obj: any, searchText: string) {
   const keyTree: JSONObject = {};
   let matchesInKey = false;
 
-  if (typeof obj !== "object") return null;
+  if (!isObject(obj) && !Array.isArray(obj)) return null;
 
   for (const key in obj) {
-    if (!Array.isArray(obj) && matchesText(key, searchText)) {
+    if (isObject(obj) && matchesText(key, searchText)) {
       matchesInKey = true;
     }
 
-    if (typeof obj[key] === "object") {
+    if (isObject(obj[key]) || Array.isArray(obj[key])) {
       const nestedKeyTree = lookup(obj[key], searchText);
       if (nestedKeyTree != null) {
         keyTree[key] = nestedKeyTree;
       }
-    } else {
-      if (matchesText(obj[key], searchText)) {
-        keyTree[key] = true;
-      }
+    } else if (matchesText(obj[key], searchText)) {
+      keyTree[key] = true;
     }
   }
 
@@ -73,14 +71,6 @@ export function checkAllObjects(data: JSONObject | any | any[]) {
       Object.keys(data[i]).forEach((k) => keysSet.add(k));
     }
     keys = Array.from(keysSet);
-    if (allObjects) {
-      for (let i = 0; i < data.length; i++) {
-        data[i] = keys.reduce((obj: JSONObject, key) => {
-          obj[key] = data[i][key];
-          return obj;
-        }, {});
-      }
-    }
   } else if (isObject(data)) {
     keys = Object.keys(data);
   }
@@ -104,6 +94,9 @@ export function validateProps({
   }
   if (defaultExpandDepth && defaultExpandDepth < 0) {
     throw new Error("JSONGrid: defaultExpandDepth prop must not be a negative number");
+  }
+  if (defaultExpandKeyTree && !isObject(defaultExpandKeyTree)) {
+    throw new Error("JSONGrid: defaultExpandKeyTree prop must be an object");
   }
   if (onSelect && typeof onSelect !== "function") {
     throw new Error("JSONGrid: onSelect prop must be a function");
