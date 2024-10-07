@@ -24,29 +24,13 @@ The library react-json-grid provides the React component JSONGrid, which is a us
 
 ## Install
 
-Run either one in your React project directory:
+Run the following command in your React project directory:
 
 ```bash
 npm install @redheadphone/react-json-grid
 ```
 
-```bash
-yarn add @redheadphone/react-json-grid
-```
-
-### CDN
-
-You can also include the library directly via CDN:
-
-```html
-<script src="https://unpkg.com/@redheadphone/react-json-grid@{version}/dist/index.umd.js"></script>
-```
-
-Replace {version} with the desired version number, like 0.6.0. Then, use the component as follows:
-
-```jsx
-const JSONGrid = window['react-json-grid'];
-```
+You can also use other package managers like `yarn` or `pnpm`, if preferred.
 
 ## Usage
 

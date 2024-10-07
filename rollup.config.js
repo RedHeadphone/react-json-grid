@@ -1,5 +1,6 @@
 import babel from "@rollup/plugin-babel";
 import typescript from '@rollup/plugin-typescript';
+import external from "rollup-plugin-peer-deps-external";
 import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import postcss from "rollup-plugin-postcss";
@@ -38,6 +39,7 @@ export default {
     },
   ],
   plugins: [
+    external(),
     typescript(),
     postcss({
       modules: true,
