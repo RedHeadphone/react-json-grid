@@ -22,7 +22,7 @@ interface Themes {
   [key: string]: Theme;
 }
 
-type keyPathNode = string | string[] | number;
+type keyPathNode = string | string[] | number | number[];
 
 interface JSONGridProps {
   data: JSONObject;

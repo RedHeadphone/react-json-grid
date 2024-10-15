@@ -60,6 +60,7 @@ export function mergeKeyTrees(keyTree1: JSONObject | any, keyTree2: JSONObject |
 export function checkAllObjects(data: JSONObject | any | any[]) {
   let allObjects = false;
   let keys: Array<string> = [];
+  let isArray = Array.isArray(data);
   if (Array.isArray(data)) {
     allObjects = data.length > 0;
     let keysSet: Set<string> = new Set();
@@ -70,11 +71,12 @@ export function checkAllObjects(data: JSONObject | any | any[]) {
       }
       Object.keys(data[i]).forEach((k) => keysSet.add(k));
     }
-    keys = Array.from(keysSet);
+    if (allObjects) keys = Array.from(keysSet);
+    else keys = Object.keys(data);
   } else if (isObject(data)) {
     keys = Object.keys(data);
   }
-  return { allObjects, keys };
+  return { allObjects, keys, isArray };
 }
 
 export function validateProps({

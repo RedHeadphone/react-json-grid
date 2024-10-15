@@ -130,17 +130,17 @@ describe("mergeKeyTrees function", () => {
 describe("checkAllObjects function", () => {
   test("should return false for allObjects when data is null", () => {
     const data = null;
-    expect(checkAllObjects(data)).toEqual({ allObjects: false, keys: [] });
+    expect(checkAllObjects(data)).toEqual({ allObjects: false, keys: [], isArray: false });
   });
 
   test("should return true for allObjects and an empty array for keys when data is an empty array", () => {
     const data: any[] = [];
-    expect(checkAllObjects(data)).toEqual({ allObjects: false, keys: [] });
+    expect(checkAllObjects(data)).toEqual({ allObjects: false, keys: [], isArray: true });
   });
 
   test("should return false for allObjects when data is an array of non-objects", () => {
     const data = [1, "two", true];
-    expect(checkAllObjects(data)).toEqual({ allObjects: false, keys: [] });
+    expect(checkAllObjects(data)).toEqual({ allObjects: false, keys: ["0","1","2"], isArray: true });
   });
 
   test("should return true for allObjects and an array with the keys for the objects when data is an array of objects with the same keys", () => {
@@ -151,6 +151,7 @@ describe("checkAllObjects function", () => {
     expect(checkAllObjects(data)).toEqual({
       allObjects: true,
       keys: ["key1", "key2"],
+      isArray: true,
     });
   });
 
@@ -163,6 +164,7 @@ describe("checkAllObjects function", () => {
     expect(checkAllObjects(data)).toEqual({
       allObjects: true,
       keys: ["key1", "key2"],
+      isArray: true,
     });
   });
 
@@ -174,6 +176,7 @@ describe("checkAllObjects function", () => {
     expect(checkAllObjects(data)).toEqual({
       allObjects: true,
       keys: ["key1", "key2", "key3"],
+      isArray: true,
     });
   });
 });
