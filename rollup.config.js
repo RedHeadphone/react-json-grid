@@ -42,7 +42,10 @@ export default {
     external(),
     typescript(),
     postcss({
-      modules: true,
+      autoModules: false,
+      modules: {
+        generateScopedName: "[local]",
+      },
     }),
     url(),
     babel({
