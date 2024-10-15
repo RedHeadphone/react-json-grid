@@ -36,7 +36,7 @@ const NestedJSONGrid = (props: NestedGridProps) => {
         nextHighlightElement?.parentElement?.children,
         nextHighlightElement
       );
-      nextKeyPath = [rowIndex];
+      nextKeyPath = [(isArray && !allObjects ? [rowIndex] : rowIndex)];
     } else if (currentTarget.hasAttribute("data-colhighlight")) {
       const colIndex = Array.prototype.indexOf.call(currentTarget.parentElement?.children, currentTarget);
       nextHighlightElement = currentTarget.parentElement?.parentElement?.previousElementSibling?.children[
@@ -59,7 +59,7 @@ const NestedJSONGrid = (props: NestedGridProps) => {
         if (colIndex === 0) {
           nextKeyPath = [[key]];
         } else {
-          nextKeyPath = [key];
+          nextKeyPath = [(isArray ? parseInt(key) : key)];
         }
       }
     }
@@ -179,7 +179,7 @@ const NestedJSONGrid = (props: NestedGridProps) => {
     );
   };
 
-  const { allObjects, keys } = checkAllObjects(data);
+  const { allObjects, keys, isArray } = checkAllObjects(data);
 
   if (level !== 0) {
     const [open, setOpen] = useState<boolean>(Boolean(level <= defaultExpandDepth || defaultExpandKeyTree));
