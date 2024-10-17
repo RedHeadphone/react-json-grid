@@ -18,6 +18,7 @@ const NestedJSONGrid = (props: NestedGridProps) => {
   } = props;
 
   const highlight = (event: React.MouseEvent) => {
+    event.stopPropagation();
     const target = event.target as HTMLElement;
     const currentTarget = event.currentTarget as HTMLElement;
     if (
