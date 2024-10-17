@@ -40,10 +40,10 @@ interface NestedGridProps {
   keyPath: keyPathNode[];
   dataKey?: string;
   data: JSONObject;
-  highlightedElement: HTMLElement | null;
+  highlightedElement: HTMLElement | HTMLElement[] | null;
   highlightSelected: boolean;
   onSelect: (keyPath: keyPathNode[]) => void;
-  setHighlightedElement: (element: HTMLElement | null) => void;
+  setHighlightedElement: (element: HTMLElement | HTMLElement[] | null) => void;
   defaultExpandDepth: number;
   defaultExpandKeyTree: JSONObject;
   searchText: string;

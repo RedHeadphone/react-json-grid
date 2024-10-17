@@ -28,21 +28,40 @@ const NestedJSONGrid = (props: NestedGridProps) => {
       return;
 
     let nextKeyPath: keyPathNode[] = [];
-    let nextHighlightElement: HTMLElement | null = currentTarget;
+    let nextHighlightElement: HTMLElement | HTMLElement[] | null = currentTarget;
 
-    if (highlightedElement != null) highlightedElement.classList.remove(styles.highlight);
+    if (highlightedElement != null) {
+      if (Array.isArray(highlightedElement)) {
+        highlightedElement.forEach((element) => {
+          element.classList.remove(styles.highlight);
+        });
+      } else {
+        highlightedElement.classList.remove(styles.highlight);
+      }
+    }
     if (currentTarget.hasAttribute("data-rowhighlight")) {
       nextHighlightElement = currentTarget.parentElement;
       const rowIndex = Array.prototype.indexOf.call(
         nextHighlightElement?.parentElement?.children,
         nextHighlightElement
       );
-      nextKeyPath = [(isArray && !allObjects ? [rowIndex] : rowIndex)];
+      nextKeyPath = [isArray && !allObjects ? [rowIndex] : rowIndex];
     } else if (currentTarget.hasAttribute("data-colhighlight")) {
       const colIndex = Array.prototype.indexOf.call(currentTarget.parentElement?.children, currentTarget);
-      nextHighlightElement = currentTarget.parentElement?.parentElement?.previousElementSibling?.children[
-        colIndex
-      ] as HTMLElement | null;
+      const tableRows = currentTarget.parentElement?.parentElement?.parentElement
+        ?.getElementsByTagName("tbody")
+        ?.item(0)?.children;
+      if (tableRows) {
+        nextHighlightElement = [
+          ...Array.from(tableRows)
+            .map((element) => {
+              return element.children[colIndex] as HTMLElement | null;
+            })
+            .filter((element) => element !== null),
+        ];
+      } else {
+        nextHighlightElement = null;
+      }
       nextKeyPath = [[keys[colIndex - 1]]];
     } else {
       const rowIndex = Array.prototype.indexOf.call(
@@ -60,11 +79,19 @@ const NestedJSONGrid = (props: NestedGridProps) => {
         if (colIndex === 0) {
           nextKeyPath = [[key]];
         } else {
-          nextKeyPath = [(isArray ? parseInt(key) : key)];
+          nextKeyPath = [isArray ? parseInt(key) : key];
         }
       }
     }
-    if (highlightSelected) nextHighlightElement?.classList.add(styles.highlight);
+    if (highlightSelected) {
+      if (Array.isArray(nextHighlightElement)) {
+        nextHighlightElement.forEach((element) => {
+          element.classList.add(styles.highlight);
+        });
+      } else {
+        nextHighlightElement?.classList.add(styles.highlight);
+      }
+    }
     setHighlightedElement(nextHighlightElement);
     onSelect(keyPath.concat(nextKeyPath));
   };
@@ -104,12 +131,6 @@ const NestedJSONGrid = (props: NestedGridProps) => {
       <table className={styles["json-grid-table"]}>
         {allObjects && (
           <Fragment>
-            <colgroup>
-              <col></col>
-              {keys.map((key: string) => (
-                <col key={key}></col>
-              ))}
-            </colgroup>
             <thead>
               <tr>
                 <th className={classnames(styles.obj, styles.order)} data-clickable="true">

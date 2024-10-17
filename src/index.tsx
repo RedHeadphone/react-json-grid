@@ -13,13 +13,21 @@ const JSONGrid: React.FC<any> = ({
   theme = "default",
   customTheme = {},
 }) => {
-  const [highlightedElement, setHighlightedElement] = useState<HTMLElement | null>(null);
+  const [highlightedElement, setHighlightedElement] = useState<HTMLElement | HTMLElement[] | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as HTMLElement)) {
-        if (highlightedElement !== null) highlightedElement.classList.remove(styles.highlight);
+        if (highlightedElement !== null) {
+          if (Array.isArray(highlightedElement)) {
+            highlightedElement.forEach((element) => {
+              element.classList.remove(styles.highlight);
+            })
+          } else {
+            highlightedElement.classList.remove(styles.highlight);
+          }
+        }
         setHighlightedElement(null);
       }
     }
