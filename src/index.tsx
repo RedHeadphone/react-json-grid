@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./styles.scss";
 import { lookup, mergeKeyTrees, validateProps, getThemeStyles } from "./utils";
 import NestedJSONGrid from "./nestedGrid";
+import { keyPathNode, JSONGridProps } from "./types";
 
 const JSONGrid: React.FC<JSONGridProps> = ({
   data,
@@ -63,4 +64,5 @@ const JSONGrid: React.FC<JSONGridProps> = ({
   );
 };
 
+export type { keyPathNode, JSONGridProps };
 export default JSONGrid;
