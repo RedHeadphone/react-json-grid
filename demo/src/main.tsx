@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import JSONGrid from "@redheadphone/react-json-grid";
+import type { keyPathNode } from "@redheadphone/react-json-grid";
 
 const App: React.FC = () => {
   const data = {
@@ -103,7 +104,7 @@ const App: React.FC = () => {
       <JSONGrid
         data={data}
         searchText={"Clair"}
-        onSelect={(keyPath: any) => console.log(keyPath)}
+        onSelect={(keyPath: keyPathNode[]) => console.log(keyPath)}
         theme={"moonLight"}
         customTheme={{ tableIconColor: "#e4e4e4" }}
         defaultExpandKeyTree={keyTree}

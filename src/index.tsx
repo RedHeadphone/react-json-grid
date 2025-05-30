@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./styles.scss";
 import { lookup, mergeKeyTrees, validateProps, getThemeStyles } from "./utils";
 import NestedJSONGrid from "./nestedGrid";
+import { keyPathNode, JSONGridProps } from "./types";
 
-const JSONGrid: React.FC<any> = ({
+const JSONGrid: React.FC<JSONGridProps> = ({
   data,
   defaultExpandDepth = 0,
   defaultExpandKeyTree = {},
-  onSelect = (keyPath: any) => {},
+  onSelect = (keyPath: keyPathNode[]) => {},
   highlightSelected = true,
-  searchText,
+  searchText = null,
   theme = "default",
   customTheme = {},
 }) => {
@@ -63,4 +64,5 @@ const JSONGrid: React.FC<any> = ({
   );
 };
 
+export type { keyPathNode, JSONGridProps };
 export default JSONGrid;
