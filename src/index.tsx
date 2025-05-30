@@ -3,13 +3,13 @@ import styles from "./styles.scss";
 import { lookup, mergeKeyTrees, validateProps, getThemeStyles } from "./utils";
 import NestedJSONGrid from "./nestedGrid";
 
-const JSONGrid: React.FC<any> = ({
+const JSONGrid: React.FC<JSONGridProps> = ({
   data,
   defaultExpandDepth = 0,
   defaultExpandKeyTree = {},
-  onSelect = (keyPath: any) => {},
+  onSelect = (keyPath: keyPathNode[]) => {},
   highlightSelected = true,
-  searchText,
+  searchText = null,
   theme = "default",
   customTheme = {},
 }) => {
