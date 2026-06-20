@@ -9,6 +9,7 @@ const JSONGrid: React.FC<JSONGridProps> = ({
   defaultExpandDepth = 0,
   defaultExpandKeyTree = {},
   onSelect = (keyPath: keyPathNode[]) => {},
+  onBlur = () => {},
   highlightSelected = true,
   searchText = null,
   theme = "default",
@@ -20,13 +21,16 @@ const JSONGrid: React.FC<JSONGridProps> = ({
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as HTMLElement)) {
-        if (highlightedElement !== null) highlightedElement.classList.remove(styles.highlight);
+        if (highlightedElement !== null) {
+          highlightedElement.classList.remove(styles.highlight);
+          onBlur();
+        }
         setHighlightedElement(null);
       }
     }
     document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
-  }, [highlightedElement]);
+  }, [highlightedElement, onBlur]);
 
   useEffect(() => {
     validateProps({

@@ -5,6 +5,7 @@ export interface JSONGridProps {
   defaultExpandDepth?: number;
   defaultExpandKeyTree?: JSONObject;
   onSelect?: (keyPath: keyPathNode[]) => void;
+  onBlur?: () => void;
   highlightSelected?: boolean;
   searchText?: string | null;
   theme?: string;

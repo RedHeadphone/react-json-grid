@@ -104,7 +104,8 @@ const App: React.FC = () => {
       <JSONGrid
         data={data}
         searchText={"Clair"}
-        onSelect={(keyPath: keyPathNode[]) => console.log(keyPath)}
+        onSelect={(keyPath: keyPathNode[]) => console.log("onSelect", keyPath)}
+        onBlur={() => console.log("onBlur called")}
         theme={"moonLight"}
         customTheme={{ tableIconColor: "#e4e4e4" }}
         defaultExpandKeyTree={keyTree}
