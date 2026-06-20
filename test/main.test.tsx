@@ -62,6 +62,36 @@ describe("JSONGrid click highlight", () => {
     expect(getByText("Large").parentElement).not.toHaveClass("highlight");
   })
 
+  it("should call onBlur when clicking outside after selection", async () => {
+    const onBlur = jest.fn();
+    const {getByText, findByText} = render(
+      <div>
+        <JSONGrid
+          data={{
+            "fruit": "Apple",
+            "size": "Large",
+            "color": "Red",
+            "edible": true,
+            "count": 7,
+          }}
+          highlightSelected={true}
+          onBlur={onBlur}
+        />
+        <span>outside</span>
+      </div>
+    );
+
+    await findByText("Apple");
+
+    fireEvent.click(getByText("Apple"));
+    expect(getByText("Apple").parentElement).toHaveClass("highlight");
+
+    fireEvent.click(getByText("outside"));
+
+    expect(getByText("Apple").parentElement).not.toHaveClass("highlight");
+    expect(onBlur).toHaveBeenCalledTimes(1);
+  })
+
   it("should highlight table row and column correctly", async () => {
     const {baseElement, getByText, findByText} = render(
     <JSONGrid data={[{
