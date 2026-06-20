@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from "react";
 import styles from "./styles.scss";
 import { classnames, matchesText, checkAllObjects } from "./utils";
+import { keyPathNode, NestedGridProps, JSONObject } from "./types";
 
 const NestedJSONGrid = (props: NestedGridProps) => {
   const {
